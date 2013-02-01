@@ -1,0 +1,3 @@
+[submodule "app/Helpers/Library"]
+	path = app/Helpers/Library
+	url = https://github.com/ecolehetic/f3-Helpers.git
