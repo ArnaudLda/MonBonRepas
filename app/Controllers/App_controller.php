@@ -53,7 +53,22 @@ class App_controller{
  {
 	echo Views::instance()->render('inscription.html');
  }
- 
+   function dashboard()
+ {
+	echo Views::instance()->render('Dashboard.html');
+ }
+  function profil()
+ {
+	echo Views::instance()->render('Profil.html');
+ }
+  function crea_repas()
+ {
+	echo Views::instance()->render('Crea_repas.html');
+ }
+  function gest_repas()
+ {
+	echo Views::instance()->render('Gest_Repas.html');
+ }
  function __destruct(){
 
  } 
