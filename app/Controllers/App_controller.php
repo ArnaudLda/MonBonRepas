@@ -45,6 +45,14 @@ class App_controller{
     echo Views::instance()->render('userref.html');
   }
   
+  function connexion()
+ {
+	echo Views::instance()->render('connexion.html');
+ }
+  function inscription()
+ {
+	echo Views::instance()->render('inscription.html');
+ }
  
  function __destruct(){
 
