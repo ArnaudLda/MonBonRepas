@@ -25,7 +25,7 @@ header .main li:hover{background-color:#009FE0;}
 .social li:nth-child(4) a:hover{background-position: -275px -33px ;}
 
 h1{font-size:4em;width:60%;text-transform:uppercase;}
-section > div {width:30%;position:absolute;right:0;padding:2em;background-color:#009FE0;top:10em;-webkit-transition:all 1s ease;}
+section > div {width:30%;position:absolute;right:0;padding:2em;background-color:#009FE0;top:10em;-webkit-transition:all 1s ease;margin-right: 400px;}
 section .main p{margin:1.5em 0;font-family:Arial;width:70%;}
 div > nav a{display:inline-block;position:absolute;width:42px;top:-4.5em;height:42px;background-color:#009FE0;background-image: url('../css/img/sprite.png');text-indent:-9000em;}
 
