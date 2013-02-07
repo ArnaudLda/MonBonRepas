@@ -66,7 +66,7 @@ class App_controller{
           return;
         }
 		App::instance()->create();
-		echo Views::instance()->render('connexion.html');
+		F3::reroute('/connexion');
 		 break;
     }
  }
