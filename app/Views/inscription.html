@@ -43,19 +43,20 @@
     
     <div class="main collapse">
       <h1>INSCRIPTION</h1>
-	  <form method="get" action="creation">
-			<label for="prenom">Votre Prénom</label> : <input type="text" name="prenom" id="prenom" /><br/>
-			<label for="nom">Votre nom</label> : <input type="text" name="nom" id="nom" /><br/>
-			<label for="mail">Votre mail</label> : <input type="text" name="mail" id="mail" /><br/>
-			<label for="passwd">Votre passwd</label> : <input type="text" name="passwd" id="passwd" />
+	  <form method="post" action="" enctype="multipart/form-data">
+			<label for="prenom">Votre Prénom</label> : <input type="text" name="prenom" id="prenom" placeholder="Prénom" <?php if($errorMsg['title']){echo 'value="error"';} ?> /><br/>
+			<label for="nom">Votre nom</label> : <input type="text" name="nom" id="nom" placeholder="Nom" <?php if($errorMsg['title']){echo 'value="error"';} ?>/><br/>
+			<label for="mail">Votre mail</label> : <input type="text" name="mail" id="mail" placeholder="Adresse e-mail" <?php if($errorMsg['title']){echo 'value="error"';} ?>/><br/>
+			<label for="passwd">Votre passwd</label> : <input type="text" name="passwd" id="passwd" placeholder="Mot de passe" <?php if($errorMsg['title']){echo 'value="error"';} ?> /><br/>
+			<input type="submit" value="Envoyer" />
 	  </form>
   </section>
   <footer>
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
+  /*var datas=<?php echo F3::raw($pictures) ?>;
+  var coords=<?php echo F3::raw($coords) ?>;*/
   </script>
   
 </body>

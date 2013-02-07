@@ -45,6 +45,47 @@ class App_controller{
     echo Views::instance()->render('userref.html');
   }
   
+  function connexion()
+ {
+	echo Views::instance()->render('connexion.html');
+ }
+  function inscription()
+ {
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+        echo Views::instance()->render('inscription.html');
+      break;
+      case 'POST':
+	 $check=array('prenom'=>'required','nom'=>'required','mail'=>'required','passwd'=>'required');
+        $error=Datas::instance()->check(F3::get('POST'),$check);
+        if($error)
+		{
+          F3::set('errorMsg',$error);
+          echo Views::instance()->render('inscription.html');
+          return;
+        }
+		App::instance()->create();
+		echo Views::instance()->render('connexion.html');
+		 break;
+    }
+ }
+   function dashboard()
+ {
+	echo Views::instance()->render('Dashboard.html');
+ }
+  function profil()
+ {
+	echo Views::instance()->render('Profil.html');
+ }
+  function crea_repas()
+ {
+	echo Views::instance()->render('Crea_repas.html');
+ }
+  function gest_repas()
+ {
+	echo Views::instance()->render('Gest_Repas.html');
+ }
  
  function __destruct(){
 

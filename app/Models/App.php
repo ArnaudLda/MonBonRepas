@@ -17,6 +17,12 @@ class App extends Prefab{
     return $location->load(array('id=?',$id));
   }
   
+    function create(){
+    $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+    $inscrit->copyFrom('POST');
+    $inscrit->save();
+  }
+  
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
     return $pictures->find(array('idLocation=?',$idLocation));
