@@ -4,7 +4,7 @@
  *
  * @package 1.0
  */
-class views extends View{
+class Views extends View{
 
  
   /** 
@@ -45,8 +45,8 @@ class views extends View{
     if(F3::get('AJAX')&&F3::get('REQUEST.callback')){
       return F3::get('REQUEST.callback').'('.json_encode($output).')';
     }
+    
     return json_encode($output);
-  
   }
   
   protected function _dataSet($format,$item){
@@ -54,7 +54,7 @@ class views extends View{
        if(is_object($item)&&isset($item->$elmt))
          return $item->$elmt;
        if(is_array($item)&&isset($item[$elmt]))
-         return $item[$elmt];
+          return $item[$elmt];
        },$format);
    }
   

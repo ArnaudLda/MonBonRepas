@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Datas class extending native Prefab
  *
@@ -15,18 +15,21 @@ class Datas extends Prefab{
     foreach($rules as $item=>$rule){
       $rulz=explode(',',$rule);
       $check[$item]=array_map(function ($rul) use ($datas,$item){
+        if(!isset($datas[$item])){
+          return;
+        }
         if($rul=='required'){
           if(!$datas[$item])
-            return F3::get($item).' '.F3::get('is required');
+            return 'false';
         }
         if (preg_match("/(\w+)->(\w+)/i",$rul,$matches)){
           $valid=new $matches[1];
           if(!$valid->$matches[2]($datas[$item]))
-            return F3::get($item).' '.F3::get('is invalid');
+            return 'false';
         }
         if(preg_match("/^=(\w+)/",$rul,$matches)){
           if($datas[$item]!=$datas[$matches[1]])
-            return F3::get($item).' '.F3::get('must match').' '.$matches[1];
+            return 'false';
         }
       },$rulz);
     }

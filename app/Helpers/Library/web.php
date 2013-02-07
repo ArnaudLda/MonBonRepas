@@ -72,7 +72,7 @@ class Web extends Prefab {
 				'zip'=>'application/zip'
 			);
 			foreach ($map as $key=>$val)
-				if (preg_match('/'.$key.'/',$ext[0]))
+				if (preg_match('/'.$key.'/i',$ext[0]))
 					return $val;
 		}
 		return 'application/octet-stream';
@@ -132,7 +132,7 @@ class Web extends Prefab {
 			mkdir($dir,Base::MODE,TRUE);
 		if ($fw->get('VERB')=='PUT') {
 			$fw->write($dir.basename($fw->get('URI')),$fw->get('BODY'));
-			return TRUE;
+			return basename($fw->get('URI'));
 		}
 		if ($fw->get('VERB')=='POST')
 			foreach ($_FILES as $item) {
@@ -150,9 +150,9 @@ class Web extends Prefab {
 					if (empty($file['name']))
 						return FALSE;
 					$base=basename($file['name']);
-					$dst=$dir.
-						($slug && preg_match('/(.+)(\.\w+)?$/',$base,$parts)?
-							$this->slug($parts[1]).$parts[2]:$base);
+					$imn=($slug && preg_match('/(.+)(\.\w+)$/',$base,$parts)?
+						$this->slug($parts[1]).$parts[2]:$base);
+					$dst=$dir.$imn;						
 					if ($file['error'] ||
 						$file['type']!=$this->mime($file['name']) ||
 						$overwrite && file_exists($dst) ||
@@ -160,7 +160,7 @@ class Web extends Prefab {
 						!move_uploaded_file($file['tmp_name'],$dst))
 						return FALSE;
 				}
-				return TRUE;
+				return $imn;
 			}
 		return FALSE;
 	}

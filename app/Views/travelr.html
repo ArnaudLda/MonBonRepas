@@ -28,9 +28,7 @@
     <a href="./"><span>Travel'r</span> BORNEO</a>
     <ul class="main">
         <li><a href="./"</a>Home</li>
-        <li><a href="connexion">CONNEXION</a></li>
-		<li><a href="inscription">INSCRIPTION</a></li>
-		<li><a href="test">TEST</a></li>
+        <li><a href="travel">Go there</a></li>
     </ul>
     
     <ul class="social">
@@ -56,7 +54,7 @@
       <p><?php echo $location->content ?></p>
       
     </div>
-    <div class="map">
+    <div class="map frame">
       <nav><a href="" class="close">close</a></nav>
       <div id="map_canvas">
       </div>
@@ -66,11 +64,6 @@
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
-  <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
-  </script>
-  
 </body>
 </html>
 

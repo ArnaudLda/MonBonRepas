@@ -5,3 +5,5 @@ last updates
 =
 
 views.php : added nl2p, toJson
+
+datas.php : added check

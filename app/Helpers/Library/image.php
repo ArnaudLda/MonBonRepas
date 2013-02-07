@@ -491,9 +491,8 @@ class Image {
 			$fw=Base::instance();
 			// Create image from file
 			$this->file=$file;
-			foreach ($fw->split($fw->get('UI')) as $dir)
-				if (is_file($dir.$file)) {
-					$this->data=imagecreatefromstring($fw->read($dir.$file));
+				if (is_file($file)) {
+					$this->data=imagecreatefromstring($fw->read($file));
 					imagesavealpha($this->data,TRUE);
 					$this->save();
 				}

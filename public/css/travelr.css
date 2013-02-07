@@ -1,4 +1,4 @@
-@font-face {font-family: 'DIN';src: url('fonts/OSP-DIN-webfont.eot');src: url('fonts/OSP-DIN-webfont.eot?#iefix') format('embedded-opentype'),url('fonts/OSP-DIN-webfont.woff') format('woff'),url('fonts/OSP-DIN-webfont.ttf') format('truetype'),url('fonts/OSP-DIN-webfont.svg#OSPDIN') format('svg');font-weight: normal;font-style: normal;}
+@font-face {font-family: 'DIN';src: url('font/OSP-DIN-webfont.eot');src: url('font/OSP-DIN-webfont.eot?#iefix') format('embedded-opentype'),url('font/OSP-DIN-webfont.woff') format('woff'),url('font/OSP-DIN-webfont.ttf') format('truetype'),url('font/OSP-DIN-webfont.svg#OSPDIN') format('svg');font-weight: normal;font-style: normal;}
 body{font-family:'DIN',Arial,sans-serif;font-size:90%;color:#fff;}
 nav, section, footer{position:relative;z-index:3;}
 a{text-decoration:none;color:#fff;}
@@ -25,14 +25,19 @@ header .main li:hover{background-color:#009FE0;}
 .social li:nth-child(4) a:hover{background-position: -275px -33px ;}
 
 h1{font-size:4em;width:60%;text-transform:uppercase;}
-section > div {width:30%;position:absolute;right:0;padding:2em;background-color:#009FE0;top:10em;-webkit-transition:all 1s ease;margin-right: 400px;}
+section > div {width:30%;position:absolute;right:0;padding:2em;background-color:#009FE0;top:10em;-webkit-transition:all 1s ease;}
+.travel section > div{width:90%;top:5em;min-height:30em;}
 section .main p{margin:1.5em 0;font-family:Arial;width:70%;}
 div > nav a{display:inline-block;position:absolute;width:42px;top:-4.5em;height:42px;background-color:#009FE0;background-image: url('../css/img/sprite.png');text-indent:-9000em;}
 
-section div.map.on{left:0;}
-section div.map{width:60%;left:-85%;-webkit-transition:left .7s ease;}
-section .map .close{right:-1.6em;}
+section div.frame.on{left:0;}
+section div.frame{width:60%;left:-85%;-webkit-transition:left .7s ease;}
+section .frame .close{right:-1.6em;}
 #map_canvas{width:100%;min-height:25em;}
+
+section div.portfolio{top:5em;}
+
+.polaroid{background-color:#fff;padding:1em;float:left;margin:1em;}
 
 .pola{background-position: -84px -126px;left:-1.7em;}
 .prev{background-position: 0 -84px;left:10em;}
@@ -46,3 +51,22 @@ footer{position: fixed;bottom: 0;height: 2em;width: 100%;background: rgba(0,0,0,
 footer a {position:relative;line-height:1.5em;font-size:1.2em;}
 footer a::before{content:'';display:block;background: transparent url('../css/img/sprite.png')0 -210px no-repeat;width: 25px;height: 33px;position:absolute; left:-2em; bottom:-5px;}
 footer a:hover::before{height:66px;}
+.error{border:4px solid #992D2E;}
+
+.admin{background-color:#111;;}
+.admin .main ul{list-style: none;}
+.admin div.main li{position:relative;line-height:3em;font-size:2em;padding:0 1em;border-bottom:1px dashed #fff;}
+.admin div.main li a{position:absolute; margin-left:1em;color:#0D0D0D;}
+.admin div.main li a:hover{color:#fff;}
+.admin .main li a:last-child{right:1em;}
+.admin .main li a:first-child{right:3em;}
+.admin h1 a{font-size:.5em;margin-left:2em;color:#0D0D0D;}
+.admin h1 a:hover{color:#fff;}
+
+fieldset{border:none;}
+input, textarea{display:block;width:80%;line-height:1.5em;font-family:'DIN',Arial,sans-serif;font-size:1.5em;color:#333;border:none;border-radius:5px;padding:0 .5em;margin:1em 0 1em 0;}
+input[name='position']{width:30%;display:inline;margin-right:1em;}
+input[type='submit']{width:auto;background-color:#fff;}
+.admin #map_canvas{width:80%;height:30em;background:#fff;margin:1em 0 1em 0;}
+.admin p.pictures {width:300px;margin:0;position:relative;}
+.admin p.pictures a {position:absolute;right:0;}

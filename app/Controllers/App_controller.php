@@ -16,15 +16,15 @@ class App_controller{
     }
     F3::set('location',$location);
     
-    F3::set('coords',Views::instance()->toJson($location,array('lat'=>'lat','lng'=>'lng')));
+    if(F3::get('AJAX')){
+      $ajax['coords']['lat']=$location->lat;
+      $ajax['coords']['lng']=$location->lng;
+      $pictures=App::instance()->locationPictures($location->id);
+      $ajax['pictures']=array_map(function($item){return array('image'=>$item->src);},$pictures);
+      echo json_encode($ajax);
+      return;
+    }
 
-    
-    $pictures=$App->locationPictures($location->id);
-
-    $json=Views::instance()->toJson($pictures,array('image'=>'src'));
-    F3::set('pictures',$json);
-    //F3::set('location',App::instance()->locationDetails(););
-    
     
     $next=$App->getNext($location->id);
     $prev=$App->getPrev($location->id);
@@ -45,59 +45,7 @@ class App_controller{
     echo Views::instance()->render('userref.html');
   }
   
-  function connexion()
- {
-	echo Views::instance()->render('connexion.html');
- }
-  function inscription()
- {
-	 $units=array(
-      array('firstname'=>'$_GET["prenom"]','lastname'=>'francois','email'=>'pumir@hetic.net','email_check'=>'pumir@hetic.net'),
-      /*array('firstname'=>'','lastname'=>'francois','email'=>'pumir@hetic.net','email_check'=>'pumir@hetic.net'),
-      array('firstname'=>'pumir','lastname'=>'','email'=>'pumir@hetic.net','email_check'=>'pumir@hetic.net'),
-      array('firstname'=>'','lastname'=>'','email'=>'pumir@hetic.net','email_check'=>'pumir@hetic.net'),
-      array('firstname'=>'pumir','lastname'=>'francois','email'=>'pumir@heticnet','email_check'=>'pumir@heticnet'),
-      array('firstname'=>'pumir','lastname'=>'francois','email'=>'pumir@hetic.ne','email_check'=>'pumir@hetic.net'),
-      array('firstname'=>'pumir','lastname'=>'francois','email'=>'','email_check'=>'pumir@hetic.net'),
-      array('firstname'=>'pumir','lastname'=>'francois','email'=>'pumir@hetic.net','email_check'=>''),
-      array('firstname'=>'','lastname'=>'francois','email'=>'pumir@hetic.net','email_check'=>'pumir.net')*/
-    );
-    $test=new \Test;
-    foreach ($units as $unit) {
-      F3::mock('POST /travel',$unit);
-      $test->expect(
-        !F3::get('errorMsg'),
-        'POST : '.
-        $unit['firstname'].' | '.
-        $unit['lastname'].' | '.
-        $unit['email'].' | '.
-        $unit['email_check'].' => '.
-        F3::stringify(F3::get('errorMsg'))
-        );
-    }
-    F3::set('results',$test->results());
-	echo Views::instance()->render('inscription.html');
- }
-   function dashboard()
- {
-	echo Views::instance()->render('Dashboard.html');
- }
-  function profil()
- {
-	echo Views::instance()->render('Profil.html');
- }
-  function crea_repas()
- {
-	echo Views::instance()->render('Crea_repas.html');
- }
-  function gest_repas()
- {
-	echo Views::instance()->render('Gest_Repas.html');
- }
-   function test()
- {
-	echo Views::instance()->render('test.html');
- }
+ 
  function __destruct(){
 
  } 
