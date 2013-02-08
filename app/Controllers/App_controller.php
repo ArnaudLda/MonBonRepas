@@ -57,7 +57,7 @@ class App_controller{
         echo Views::instance()->render('inscription.html');
       break;
       case 'POST':
-	 $check=array('prenom'=>'required','nom'=>'required','mail'=>'required','passwd'=>'required');
+	 $check=array('prenom'=>'required','nom'=>'required','mail'=>'required,Audit->email','passwd'=>'required',);
         $error=Datas::instance()->check(F3::get('POST'),$check);
         if($error)
 		{

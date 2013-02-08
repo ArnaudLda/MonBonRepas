@@ -14,7 +14,7 @@ class Travel_controller{
     $check=array(
       'firstname'=>'required',
       'lastname'=>'required',
-      'email'=>'required,Audit->email',
+      'email'=>'required',
       'email_check'=>'=email'
     );
     $error=Datas::instance()->check(F3::get('POST'),$check);
