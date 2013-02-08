@@ -44,10 +44,10 @@
     <div class="main collapse">
       <h1>INSCRIPTION</h1>
 	  <form method="post" action="" enctype="multipart/form-data">
-			<label for="prenom">Votre Prénom</label> : <input type="text" name="prenom" id="prenom" placeholder="Prénom" <?php if($errorMsg['title']){echo 'value="error"';} ?> /><br/>
-			<label for="nom">Votre nom</label> : <input type="text" name="nom" id="nom" placeholder="Nom" <?php if($errorMsg['title']){echo 'value="error"';} ?>/><br/>
-			<label for="mail">Votre mail</label> : <input type="text" name="mail" id="mail" placeholder="Adresse e-mail" <?php if($errorMsg['title']){echo 'value="error"';} ?>/><br/>
-			<label for="passwd">Votre passwd</label> : <input type="text" name="passwd" id="passwd" placeholder="Mot de passe" <?php if($errorMsg['title']){echo 'value="error"';} ?> /><br/>
+			<label for="prenom">Votre Prénom</label> : <input type="text" name="prenom" id="prenom" placeholder="Prénom" autocomplete="off" /><?php if($errorMsg['prenom']){echo 'value="error"';} ?> <br/>
+			<label for="nom">Votre nom</label> : <input type="text" name="nom" id="nom" placeholder="Nom" autocomplete="off"/><?php if($errorMsg['nom']){echo 'value="error"';} ?><br/>
+			<label for="mail">Votre mail</label> : <input type="text" name="mail" id="mail" placeholder="Adresse e-mail" autocomplete="off"/><?php if($errorMsg['mail']){echo 'value="error"';} ?><br/>
+			<label for="passwd">Votre passwd</label> : <input type="password" name="passwd" id="passwd" placeholder="Mot de passe" autocomplete="off"/><?php if($errorMsg['passwd']){echo 'value="error"';} ?><br/>
 			<input type="submit" value="Envoyer" />
 	  </form>
   </section>

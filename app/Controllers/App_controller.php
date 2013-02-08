@@ -67,7 +67,7 @@ class App_controller{
         }
 		App::instance()->create();
 		F3::reroute('/connexion');
-		 break;
+		break;
     }
  }
    function dashboard()
