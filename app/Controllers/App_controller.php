@@ -44,11 +44,7 @@ class App_controller{
   function doc(){
     echo Views::instance()->render('userref.html');
   }
-  
-  function connexion()
- {
-	echo Views::instance()->render('connexion.html');
- }
+
   function inscription()
  {
 	switch(F3::get('VERB'))
@@ -73,6 +69,10 @@ class App_controller{
    function dashboard()
  {
 	echo Views::instance()->render('Dashboard.html');
+ }
+  function connexion()
+ {
+	echo Views::instance()->render('connexion.html');
  }
   function profil()
  {

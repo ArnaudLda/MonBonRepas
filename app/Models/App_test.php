@@ -19,7 +19,7 @@ class App extends Prefab{
   
     function create($mail){
     $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-	$inscrit->find(array('mail=?',$mail));
+	$inscrit->load(array('mail=?',$mail));
 	$exist=false;
 	foreach($inscrit as $inscrits)
 	{
@@ -30,7 +30,7 @@ class App extends Prefab{
 	}
 	if($exist)
 	{
-		return false;
+		return $exist;
 	}
 	else
 	{
@@ -39,6 +39,10 @@ class App extends Prefab{
 	}
   }
   
+  function connect()
+  {
+	return F3::get('dB')->exec("select id, title from location where id =(select min(id) from location where id > ".$id.")");
+  }
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
     return $pictures->find(array('idLocation=?',$idLocation));

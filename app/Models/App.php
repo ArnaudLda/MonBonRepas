@@ -19,8 +19,8 @@ class App extends Prefab{
   
     function create(){
     $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-    $inscrit->copyFrom('POST');
-    $inscrit->save();
+	$inscrit->copyFrom('POST');
+	$inscrit->save();
   }
   
   function locationPictures($idLocation){

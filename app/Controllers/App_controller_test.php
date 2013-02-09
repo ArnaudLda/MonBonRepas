@@ -47,7 +47,24 @@ class App_controller{
   
   function connexion()
  {
-	echo Views::instance()->render('connexion.html');
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+        echo Views::instance()->render('connexion.html');
+      break;
+      case 'POST':
+	 $check=array('mail'=>'required,Audit->email','passwd'=>'required',);
+        $error=Datas::instance()->check(F3::get('POST'),$check);
+        if($error)
+		{
+          F3::set('errorMsg',$error);
+          echo Views::instance()->render('connexion.html');
+          return;
+        }
+		App::instance()->connect();
+		F3::reroute('/dashboard');
+		break;
+    }
  }
   function inscription()
  {
@@ -66,16 +83,15 @@ class App_controller{
           return;
         }
 		$test=App::instance()->create($check['mail']);
-		if($test==false)
+		if($test)
 		{
-			$error="Adresse mail déjà existante";
-			F3::set('errorMsg[mail]',$error);
-			echo Views::instance()->render('inscription.html');
+		  $error="error";
+		  F3::set('errorMsg["mail"]',$error);
+          echo Views::instance()->render('inscription.html');
+          return;
 		}
 		else
-		{
 			F3::reroute('/connexion');
-		}
 		break;
     }
  }
