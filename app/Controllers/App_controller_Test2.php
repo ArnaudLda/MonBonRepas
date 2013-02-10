@@ -44,28 +44,7 @@ class App_controller{
   function doc(){
     echo Views::instance()->render('userref.html');
   }
-  
-  function connexion()
- {
-	switch(F3::get('VERB'))
-	{
-      case 'GET':
-        echo Views::instance()->render('connexion.html');
-      break;
-      case 'POST':
-	 $check=array('mail'=>'required,Audit->email','passwd'=>'required',);
-        $error=Datas::instance()->check(F3::get('POST'),$check);
-        if($error)
-		{
-          F3::set('errorMsg',$error);
-          echo Views::instance()->render('connexion.html');
-          return;
-        }
-		$connect=App::instance()->connect($check['mail'],$check['passwd']);
-		F3::reroute('/dashboard');
-		break;
-    }
- }
+
   function inscription()
  {
 	switch(F3::get('VERB'))
@@ -82,22 +61,18 @@ class App_controller{
           echo Views::instance()->render('inscription.html');
           return;
         }
-		$test=App::instance()->create($check['mail']);
-		if($test)
-		{
-		  $error="error";
-		  F3::set('errorMsg["mail"]',$error);
-          echo Views::instance()->render('inscription.html');
-          return;
-		}
-		else
-			F3::reroute('/connexion');
+		App::instance()->create();
+		F3::reroute('/connexion');
 		break;
     }
  }
    function dashboard()
  {
 	echo Views::instance()->render('Dashboard.html');
+ }
+  function connexion()
+ {
+	echo Views::instance()->render('connexion.html');
  }
   function profil()
  {

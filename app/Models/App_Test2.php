@@ -17,32 +17,12 @@ class App extends Prefab{
     return $location->load(array('id=?',$id));
   }
   
-    function create($mail){
+    function create(){
     $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-	$inscrit->load(array('mail=?',$mail));
-	$exist=false;
-	foreach($inscrit as $inscrits)
-	{
-		if($inscrits['mail']==$mail)
-		{
-			$exist=true;
-		}
-	}
-	if($exist)
-	{
-		return $exist;
-	}
-	else
-	{
-		$inscrit->copyFrom('POST');
-		$inscrit->save();
-	}
+	$inscrit->copyFrom('POST');
+	$inscrit->save();
   }
   
-  function connect()
-  {
-	return F3::get('dB')->exec("select nom, prenom  from inscrit where id =(select min(id) from location where id > ".$id.")");
-  }
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
     return $pictures->find(array('idLocation=?',$idLocation));
