@@ -62,7 +62,7 @@ class App_controller{
           return;
         }
 		$connect=App::instance()->connect($_POST['mail'],$_POST['passwd']);
-		if($connect[0]['mail'] !=null && $connect[0]['passwd'] !=null)
+		if($connect)
 		{
 			F3::reroute('/dashboard');
 		}

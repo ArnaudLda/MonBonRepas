@@ -35,7 +35,7 @@ class App extends Prefab{
   
   function connect($mail, $passwd)
   {
-	return F3::get('dB')->exec("select nom, prenom  from inscrit where mail=".$mail." and password=".$passwd."");
+	return F3::get('dB')->exec("select nom, prenom  from inscrit where mail='$mail' and passwd='$passwd'");
   }
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
