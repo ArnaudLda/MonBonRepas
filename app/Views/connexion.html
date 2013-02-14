@@ -45,8 +45,8 @@
     <div class="main collapse">
       <h1>CONNEXION</h1>
 	  <form method="post" action="" enctype="multipart/form-data">
-			<label for="prenom">Adresse mail</label> : <input type="text" name="mail" id="mail" placeholder="Adresse mail" autocomplete="off" /><?php if($errorMsg['mail']){echo 'value="error"';} ?> <br/>
-			<label for="nom">Mot de passe</label> : <input type="password" name="passwd" id="passwd" placeholder="Mot de passe" autocomplete="off"/><?php if($errorMsg['passwd']){echo 'value="error"';} ?><br/>
+			<label for="mail">Adresse mail</label> : <input type="text" name="mail" id="mail" placeholder="Adresse mail" autocomplete="off" /><?php if($errorMsg['mail']){echo 'value="error"';} ?> <br/>
+			<label for="passwd">Mot de passe</label> : <input type="password" name="passwd" id="passwd" placeholder="Mot de passe" autocomplete="off"/><?php if($errorMsg['passwd']){echo 'value="error"';} ?><br/>
 			<?php echo $check['mail'];	?>
 			<input type="submit" value="Envoyer" />
 	  </form >

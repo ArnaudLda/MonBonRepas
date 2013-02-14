@@ -53,7 +53,7 @@ class App_controller{
         echo Views::instance()->render('connexion.html');
       break;
       case 'POST':
-	  $check=array('mail'=>'required,Audit->email','passwd'=>'required',);
+	  $check=array('mail'=>'required,Audit->email','passwd'=>'required');
         $error=Datas::instance()->check(F3::get('POST'),$check);
         if($error)
 		{
@@ -83,7 +83,7 @@ class App_controller{
         echo Views::instance()->render('inscription.html');
       break;
       case 'POST':
-	 $check=array('prenom'=>'required','nom'=>'required','mail'=>'required,Audit->email','passwd'=>'required',);
+	 $check=array('prenom'=>'required','nom'=>'required','mail'=>'required,Audit->email','passwd'=>'required');
         $error=Datas::instance()->check(F3::get('POST'),$check);
         if($error)
 		{
@@ -104,6 +104,34 @@ class App_controller{
 		break;
     }
  }
+   function crea_repas()
+ {
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+        echo Views::instance()->render('Crea_Repas.html');
+      break;
+      case 'POST':
+	 $check=array('mail'=>'required,Audit->email');
+        $error=Datas::instance()->check(F3::get('POST'),$check);
+        if($error)
+		{
+          F3::set('errorMsg',$error);
+          echo Views::instance()->render('Crea_Repas.html');
+          return;
+        }
+		$test=App::instance()->crea_repas($_POST['mail']);
+		Views::instance()->render('Crea_Repas.html');
+		/*if($test)
+		{
+		  
+          return;
+		}
+		else
+			*/
+		break;
+    }
+ }
    function dashboard()
  {
 	echo Views::instance()->render('Dashboard.html');
@@ -111,10 +139,6 @@ class App_controller{
   function profil()
  {
 	echo Views::instance()->render('Profil.html');
- }
-  function crea_repas()
- {
-	echo Views::instance()->render('Crea_repas.html');
  }
   function gest_repas()
  {

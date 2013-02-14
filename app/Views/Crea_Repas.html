@@ -40,17 +40,34 @@
     </nav>
   </header>
   <section>
-    
     <div class="main collapse">
       <h1>CREEZ UN REPAS</h1>
+	  <form method="post" action="" enctype="multipart/form-data" id="ajout">
+			<label for="mail">Adresse mail de vos invités</label> : <input type="text" name="mail" id="mail" placeholder="adresse mail" autocomplete="off" /><?php if($errorMsg['mail']){echo 'value="error"';} ?> <br/>
+			<!-- <input type="button" value="Ajouter" id="add" /> -->
+			<input type="submit" value="Envoyer" />
+	  </form >
+	  <div id="test"><?php echo $test; ?></div>
   </section>
   <footer>
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
-  <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
+  <script type="text/javascript">
+		/*document.getElementById('add').addEventListener('click',ajout(this),false);
+		function ajout(e)
+		{
+			var myform=document.getElementById('ajout');
+			var ligne=document.createElement('input');
+			ligne.type='text';
+			ligne.id='mail';
+			ligne.name='mail';
+			ligne.placeholder='adresse mail';
+			ligne.autocomplete='off';
+			myform.appendChild(ligne);
+			return false;
+		}*/
+		
   </script>
   
 </body>

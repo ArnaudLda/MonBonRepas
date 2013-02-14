@@ -16,7 +16,26 @@ class App extends Prefab{
     }
     return $location->load(array('id=?',$id));
   }
-  
+  function crea_repas($mail)
+  {
+	$cle=md5(microtime(TRUE)*100000);
+	$dest=$mail;
+	$sujet = "Invitation à mon repas" ;
+	$entete = "From: MonBonRepas@votresite.com" ;
+	$message = 'Vous êtes invité à un repas,
+
+	Pour valider votre venue, veuillez cliquer sur le lien ci dessous
+	ou copier/coller dans votre navigateur internet.
+
+	http://localhost/GitHub/MonBonRepas/connexion.html?cle='.urlencode($cle).'
+
+
+	---------------
+	Ceci est un mail automatique, Merci de ne pas y répondre.';
+	mail($dest, $sujet, $message, $entete) ; // Envoi du mail
+	$test="ça marche bien";
+	return $test;
+  }
     function create($mail)
   {
     $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
