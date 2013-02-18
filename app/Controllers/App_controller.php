@@ -50,7 +50,7 @@ class App_controller{
 	switch(F3::get('VERB'))
 	{
       case 'GET':
-        echo Views::instance()->render('connexion.html');
+		echo Views::instance()->render('connexion.html');
       break;
       case 'POST':
 	  $check=array('mail'=>'required,Audit->email','passwd'=>'required');
@@ -64,6 +64,7 @@ class App_controller{
 		$connect=App::instance()->connect($_POST['mail'],$_POST['passwd']);
 		if($connect)
 		{
+			F3::set('SESSION.mail',$_POST['mail']);
 			F3::reroute('/dashboard');
 		}
 		else
@@ -120,8 +121,9 @@ class App_controller{
           echo Views::instance()->render('Crea_Repas.html');
           return;
         }
-		$test=App::instance()->crea_repas($_POST['mail']);
-		Views::instance()->render('Crea_Repas.html');
+		$Mon_mail=F3::get('SESSION.mail');
+		App::instance()->crea_repas($_POST['mail'],$Mon_mail);
+		echo Views::instance()->render('Crea_Repas.html');
 		/*if($test)
 		{
 		  
