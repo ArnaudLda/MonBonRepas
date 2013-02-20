@@ -43,8 +43,8 @@
     <div class="main collapse">
       <h1>CREEZ UN REPAS</h1>
 	  <form method="post" action="" enctype="multipart/form-data" id="ajout">
-			<label for="mail">Adresse mail de vos invités</label> : <input type="text" name="mail" id="mail" placeholder="adresse mail" autocomplete="off" /><?php if($errorMsg['mail']){echo 'value="error"';} ?> <br/>
-			<!-- <input type="button" value="Ajouter" id="add" /> -->
+			<label for="mail">Adresse mail de vos invités</label> : <input type="email" name="mail[]" placeholder="adresse mail" autocomplete="off" /><?php echo $error; ?> <br/>
+			<a href="#" id="button">+</a>
 			<input type="submit" value="Envoyer" />
 	  </form >
   </section>
@@ -53,22 +53,22 @@
   </footer>
   <span class="trama"></span>
   <script type="text/javascript">
-		/*document.getElementById('add').addEventListener('click',ajout(this),false);
-		function ajout(e)
-		{
-			var myform=document.getElementById('ajout');
-			var ligne=document.createElement('input');
-			ligne.type='text';
-			ligne.id='mail';
-			ligne.name='mail';
-			ligne.placeholder='adresse mail';
-			ligne.autocomplete='off';
-			myform.appendChild(ligne);
-			return false;
-		}*/
+	window.onload = function() {
+		var form = document.getElementById('ajout');
+		var button = document.getElementById('button');
+		var nb = 2;
 		
+		button.onclick = function() {
+			var input = document.createElement("input");
+			input.type = "text";
+			input.name = "mail[]";
+			input.placeholder = "Invité "+nb;
+			
+			form.appendChild(input);
+			nb++;
+		}
+	}
   </script>
-  
 </body>
 </html>
 

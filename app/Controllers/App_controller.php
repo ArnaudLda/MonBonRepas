@@ -113,30 +113,57 @@ class App_controller{
         echo Views::instance()->render('Crea_Repas.html');
       break;
       case 'POST':
-	 $check=array('mail'=>'required,Audit->email');
-        $error=Datas::instance()->check(F3::get('POST'),$check);
-        if($error)
+		function VerifierAdresseMail($invit)  
+			{  
+			   $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';  
+			   if(preg_match($Syntaxe,$invit))  
+				  return true;  
+			   else  
+				 return false;  
+			}
+		foreach($_POST['mail'] as $invit)
 		{
-          F3::set('errorMsg',$error);
+			$res=VerifierAdresseMail($invit);
+			if(!$res)
+			{
+				$error=true;
+			}
+			else
+			{
+				$error=false;
+			}
+		}
+		
+        if($error)
+		{	
+		  $error="Mauvais adresse mail";
+          F3::set('error',$error);
           echo Views::instance()->render('Crea_Repas.html');
           return;
         }
-		$Mon_mail=F3::get('SESSION.mail');
-		App::instance()->crea_repas($_POST['mail'],$Mon_mail);
-		echo Views::instance()->render('Crea_Repas.html');
-		/*if($test)
-		{
-		  
-          return;
-		}
 		else
-			*/
+		{
+			$Mon_mail=F3::get('SESSION.mail');
+			App::instance()->crea_repas($_POST['mail'],$Mon_mail);
+			echo Views::instance()->render('Crea_Repas.html');
+		}
 		break;
     }
  }
    function dashboard()
  {
-	echo Views::instance()->render('Dashboard.html');
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+        echo Views::instance()->render('Dashboard.html');
+      break;
+      case 'POST':
+		$Mon_mail=F3::get('SESSION.mail');
+		$invit=App::instance()->get_repas($Mon_mail);
+		F3::set('repas',$invit);
+		echo Views::instance()->render('Dashboard.html');
+	  break;
+    }
  }
   function profil()
  {
