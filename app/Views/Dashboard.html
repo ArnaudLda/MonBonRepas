@@ -32,14 +32,6 @@
 		<li><a href="Crea_Repas">Création de repas</a></li>
 		<li><a href="Gest_Repas">Gestion de repas</a></li>
     </ul>
-    <section >
-	  <?php foreach($invit as $invits): ?>
-        <h2><?php echo "Nouvelle invitation"; ?></h2>
-        <p><?php echo $invits->log_crea ?></p>
-      <?php endforeach; ?>
-	</section>
-	<section id="repas_ancien">
-	</section>
     <ul class="social">
         <li><a href="">Follow us on Twitter</a></li> 
         <li><a href="">LinkedIn</a></li>
@@ -52,15 +44,19 @@
     
     <div class="main collapse">
       <h1>DASHBOARD</h1>
+	<section >
+	  <h2><?php echo "Nouvelle invitation"; ?></h2>
+	  <?php foreach($repas as $invits): ?>
+        <p><?php echo $invits->log_crea; ?></p>
+      <?php endforeach; ?>
+	</section>
+	<section id="repas_ancien">
+	</section>
   </section>
   <footer>
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
-  <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
-  </script>
   
 </body>
 </html>

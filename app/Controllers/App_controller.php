@@ -155,7 +155,10 @@ class App_controller{
 	switch(F3::get('VERB'))
 	{
       case 'GET':
-        echo Views::instance()->render('Dashboard.html');
+		$Mon_mail=F3::get('SESSION.mail');
+		$invit=App::instance()->get_repas($Mon_mail);
+		F3::set('repas',$invit);
+		echo Views::instance()->render('Dashboard.html');
       break;
       case 'POST':
 		$Mon_mail=F3::get('SESSION.mail');

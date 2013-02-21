@@ -63,10 +63,10 @@ class App extends Prefab{
   {
 	return F3::get('dB')->exec("select nom, prenom  from inscrit where mail='$mail' and passwd='$passwd'");
   }
-  function get_repas($mail)
+  function get_repas($Mon_mail)
   {
 	$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
-	return $repas->find(array('log_invit=?',$mail));
+	return $repas->find(array('log_invit=?',$Mon_mail));
   }
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
