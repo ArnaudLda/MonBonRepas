@@ -59,15 +59,38 @@ class App extends Prefab{
 	}
   }
   
-  function connect($mail, $passwd)
-  {
+  function modif_profil() {
+    $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+	
+	$serial = serialize(F3::get('POST'));
+	
+	return F3::get('dB')->exec('// LA REQUETE ICI BATARD');
+	
+  }
+  
+  function get_profil($id) {
+    $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+	
+	//$serialized = 'a:4:{s:3:"1_4";s:2:"on";s:3:"2_1";s:2:"on";s:3:"2_2";s:2:"on";s:3:"3_6";s:2:"on";}'; // LA REQUETE ICI pour récup les infos stockés
+	$serialized = $inscrit->load(array('id=?',$id));
+	return $tab = unserialize($serialized);
+  }
+  
+  function get_gout() {
+	$gout=new DB\SQL\Mapper(F3::get('dB'),'gout');
+	
+	
+	return $tab = unserialize($serialized);
+  }
+  
+  function connect($mail, $passwd) {
 	return F3::get('dB')->exec("select nom, prenom  from inscrit where mail='$mail' and passwd='$passwd'");
   }
-  function get_repas($Mon_mail)
-  {
+  function get_repas($Mon_mail) {
 	$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 	return $repas->find(array('log_invit=?',$Mon_mail));
   }
+  
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
     return $pictures->find(array('idLocation=?',$idLocation));

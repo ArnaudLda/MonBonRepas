@@ -41,8 +41,40 @@
   </header>
   <section>
     
-    <div class="main collapse">
-      <h1>PROFIL</h1>
+	<form method="POST" action="">
+		<img src="<?php $avatar ?>" alt="Avatar" >
+		<input type="file" >
+		<label>Nom : <input type="text" value="<?php echo $nom; ?>" ></label>
+		<label>Prenom : <input type="text" value="<?php echo $prenom; ?>" ></label>
+		<label>Mail : <input type="mail" value="<?php echo $mail; ?>" ></label>
+		
+		<div>DA GOOGLE MAP MOFO</div>
+		<input type="hidden" value="<?php echo $lat; ?>" >
+		<input type="hidden" value="<?php echo $lng; ?>" >
+		<input type="submit" value="Valider">
+	</form>
+	
+	<form method="POST" action="">
+		<label>Ancien pass : <input type="password"></label>
+		<label>Nouveau pass : <input type="password"></label>
+		<label>Retaper nouveau pass : <input type="password"></label>
+		<input type="submit" value="Valider">
+	</form>
+	
+	<form method="POST" action="">
+		Qu'est ce que vous n'aimez PAS :
+			<?php foreach($gout as $categorie) :?>
+				<h3><?php echo $categorie->name; ?></h3>
+				<?php foreach($categorie as $aliment) :?>
+					<label><input type="checkbox" name="<?php echo $i.'_'.$j; ?>" <?php if ($profil[$i.'_'.$j] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $aliment->name; ?></label>
+				<?php endforeach;?>
+			<?php endforeach;?>
+			
+			<input type="submit" value="Valider">
+				
+		</form>
+		
+    
   </section>
   <footer>
     <a href="we-live-blue/">We think blue</a>

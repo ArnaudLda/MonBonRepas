@@ -150,14 +150,10 @@ class App_controller{
 		break;
     }
  }
-   function dashboard()
- {
+   function dashboard() {
 	switch(F3::get('VERB'))
 	{
       case 'GET':
-		$Mon_mail=F3::get('SESSION.mail');
-		$invit=App::instance()->get_repas($Mon_mail);
-		F3::set('repas',$invit);
 		echo Views::instance()->render('Dashboard.html');
       break;
       case 'POST':
@@ -168,10 +164,24 @@ class App_controller{
 	  break;
     }
  }
-  function profil()
- {
-	echo Views::instance()->render('Profil.html');
+ 
+  function profil() {
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+		$profil=App::instance()->get_profil();
+		F3::set('profil',$profil);
+		$gout=App::instance()->get_gout();
+		echo Views::instance()->render('Profil.html');
+      break;
+      case 'POST':
+		$profil=App::instance()->modif_profil();
+		F3::set('profil',$profil);
+		echo Views::instance()->render('Profil.html');
+	  break;
+    }
  }
+ 
   function gest_repas()
  {
 	echo Views::instance()->render('Gest_Repas.html');
