@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
@@ -44,48 +44,16 @@
   <section>
     
     <div class="main collapse">
-      <h1>GEREZ VOTRE REPAS</h1>
-	  <section >
-	  <h2>Nouvelles invitations</h2>
-	  <h2>Invitations acceptées :</h2>
-	  <?php foreach($repas as $invits): ?>
-		<?php 
-			$id=$invits->id; 
-			$statut=$invits->statut;
-			if($statut=="accepter") 
-			{?>
-		 <p><a href="repas?action=<?php echo $id; ?>"><?php echo $invits->log_crea; ?></a></p>
-		  <?php }?>
-	 <?php endforeach; ?>
-	 <h2>Invitations refusées :</h2>
-	 <?php foreach($repas as $invits): ?>
-		  <?php 
-			$id=$invits->id; 
-			$statut=$invits->statut;
-			if($statut=="refuser") 
-			{?>
-			<p><a href="repas?action=<?php echo $id; ?>"><?php echo $invits->log_crea; ?></a></p>
-			<?php }?>
-	 <?php endforeach; ?>
-	 <h2>Invitations non lues :</h2>
-	  <?php foreach($repas as $invits): ?>
-		<?php	
-			$id=$invits->id; 
-			$statut=$invits->statut;
-			if($statut=="non_lu") 
-			{?>
-		 <p><a href="repas?action=<?php echo $id; ?>"><?php echo $invits->log_crea; ?></a></p>
-		  <?php }?>
-      <?php endforeach; ?>
-	</section>
+      <h1>Message</h1><br/>
+	  <h2>Invitation de <?php echo $crea->nom; echo " ".$crea->prenom; ?></h2><br/>
+	  <h2>Son adresse mail est <?php echo $repas->log_crea; ?></h2><br/>
+	  <a href="response?action=<?php echo $repas->id; ?>&rep=accepter">ACCEPTER</a><br/><a href="response?action=<?php echo $repas->id; ?>&rep=refuser">REFUSER</a>
   </section>
   <footer>
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
   <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
   </script>
   
 </body>

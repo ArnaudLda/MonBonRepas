@@ -83,41 +83,39 @@ class App extends Prefab{
 	return $inscrit->load(array('mail=?',$mail));
   }
   
-  function get_profil($mail) {
-    $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-	$mail = "utar@hotmail.fr"; // test
-	
-	return $inscrit->load(array('mail=?',$mail));
-  }
-  
-  function get_aliment() {
-	$aliment=new DB\SQL\Mapper(F3::get('dB'),'aliments');
-	$aliments = $aliment->find();
-	
-	return $aliments;
-  }
-  
-  function get_gout() {
-	$gout=new DB\SQL\Mapper(F3::get('dB'),'gout');
-	
-	
-	return $tab = unserialize($serialized);
-  }
-  
   function connect($mail, $passwd) {
 	$connect=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 	return $connect->load(array('mail=? and passwd=?',$mail,$passwd));
   }
-  function get_repas($Mon_mail) {
+  function get_liste_repas($Mon_mail) {
 	$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 	return $repas->find(array('log_invit=?',$Mon_mail));
   }
-  
+  function get_repas($id)
+  {
+	$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
+	return $repas->load(array('id=?',$id));
+  }
   function locationPictures($idLocation){
     $pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
     return $pictures->find(array('idLocation=?',$idLocation));
   }
-  
+  function get_inscrit($mail)
+  {
+	$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+    return $inscrit->load(array('mail=?',$mail));
+  }
+  function modif_statut_repas($reponse,$id)
+  {
+	if($reponse=="accepter")
+	{
+		return F3::get('dB')->exec("UPDATE repas SET statut='$reponse' WHERE id='$id'");
+	}
+	elseif($reponse=="refuser")
+	{
+		return F3::get('dB')->exec("UPDATE repas SET statut='$reponse' WHERE id='$id'");
+	}
+  }
   function getNext($id){  
     return F3::get('dB')->exec("select id, title from location where id =(select min(id) from location where id > ".$id.")");
   }

@@ -41,27 +41,29 @@
   </header>
   <section>
     
-	<form method="POST" action="">
+	<form method="POST" action="Profil_info">
 		<img src="<?php $avatar ?>" alt="Avatar" >
 		<input type="file" >
-		<label>Nom : <input type="text" value="<?php echo $profil->nom; ?>" ></label>
-		<label>Prenom : <input type="text" value="<?php echo $profil->prenom; ?>" ></label>
-		<label>Mail : <input type="mail" value="<?php echo $profil->mail; ?>" ></label>
+		<label>Nom : <input name="nom" type="text" value="<?php echo $profil->nom; ?>" ></label>
+		<label>Prenom : <input name="prenom" type="text" value="<?php echo $profil->prenom; ?>" ></label>
+		<label>Mail : <input name="mail" type="mail" value="<?php echo $profil->mail; ?>" ></label>
 		
 		<div>DA GOOGLE MAP MOFO</div>
-		<input type="hidden" value="<?php //echo $profil->lat; ?>" >
-		<input type="hidden" value="<?php //echo $profil->lng; ?>" >
+		<input name="lat" type="hidden" value="<?php echo $profil->lat; ?>" >
+		<input name="lng" type="hidden" value="<?php echo $profil->lng; ?>" >
 		<input type="submit" value="Valider">
+		<p><?php echo $errorInfo;?></p>
 	</form>
 	
-	<form method="POST" action="">
+	<form method="POST" action="Profil_pswd">
 		<label>Ancien pass : <input name="old_pswd" type="password"></label>
 		<label>Nouveau pass : <input name="new_pswd" type="password"></label>
 		<label>Retaper nouveau pass : <input name="new_pswd_bis" type="password"></label>
 		<input type="submit" value="Valider">
+		<p><?php echo $errorPswd;?></p>
 	</form>
 	
-	<form method="POST" action="">
+	<form method="POST" action="Profil_gout">
 		Ce que vous n'aimez PAS :
 			<h3>Viandes : </h3>
 			<?php $i = 0;
@@ -82,7 +84,7 @@
 			<?php endforeach;?>
 			
 			<input type="submit" value="Valider">
-				
+			<p><?php echo $errorGout;?></p>
 		</form>
 		
     

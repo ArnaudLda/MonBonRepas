@@ -162,54 +162,73 @@ class App_controller{
    function dashboard() {
     if(!F3::get('SESSION.id'))
       F3::reroute('/');
-	switch(F3::get('VERB'))
-	{
-      case 'GET':
-		$Mon_mail=F3::get('SESSION.mail');
-		$invit=App::instance()->get_repas($Mon_mail);
-		F3::set('repas',$invit);
-		echo Views::instance()->render('Dashboard.html');
-      break;
-      case 'POST':
-		$Mon_mail=F3::get('SESSION.mail');
-		$invit=App::instance()->get_repas($Mon_mail);
-		F3::set('repas',$invit);
-		echo Views::instance()->render('Dashboard.html');
-	  break;
-    }
+	  
+	echo Views::instance()->render('Dashboard.html');
  }
  
-   function profil() {
-   if(!F3::get('SESSION.id'))
+  function gest_repas()
+ {
+	if(!F3::get('SESSION.id'))
       F3::reroute('/');
 	switch(F3::get('VERB'))
 	{
       case 'GET':
 		$Mon_mail=F3::get('SESSION.mail');
-		$profil=App::instance()->get_profil($Mon_mail);
-		F3::set('profil',$profil);
-		$gout = unserialize($profil->gout);
-		F3::set('gout',$gout);
-		
-		$aliments=App::instance()->get_aliment();
-		F3::set('aliments',$aliments);
-		
-		echo Views::instance()->render('Profil.html');
+		$invit=App::instance()->get_liste_repas($Mon_mail);
+		F3::set('repas',$invit);
+		echo Views::instance()->render('Gest_Repas.html');
       break;
       case 'POST':
 		$Mon_mail=F3::get('SESSION.mail');
-		$profil=App::instance()->modif_profil($Mon_mail);
-		F3::set('profil',$profil);
-		echo Views::instance()->render('Profil.html');
+		$invit=App::instance()->get_liste_repas($Mon_mail);
+		F3::set('repas',$invit);
+		echo Views::instance()->render('Gest_Repas.html');
+	  break;
+    }
+	
+ }
+ function repas()
+ {
+	if(!F3::get('SESSION.id'))
+      F3::reroute('/');
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+	    $Mon_mail=F3::get('SESSION.mail');
+		$id=$_GET["action"];
+		$repas=App::instance()->get_repas($id);
+		$crea=App::instance()->get_inscrit($Mon_mail);
+		F3::set('repas',$repas);
+		F3::set('crea',$crea);
+		echo Views::instance()->render('repas.html');
+      break;
+      case 'POST':
+		echo Views::instance()->render('repas.html');
 	  break;
     }
  }
- 
-  function gest_repas()
+ function change_statut()
  {
-	echo Views::instance()->render('Gest_Repas.html');
+	if(!F3::get('SESSION.id'))
+      F3::reroute('/');
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+	    $Mon_mail=F3::get('SESSION.mail');
+		$id=$_GET["action"];
+		$reponse=$_GET["rep"];
+		$rep=App::instance()->modif_statut_repas($reponse,$id);
+		$repas=App::instance()->get_repas($id);
+		$crea=App::instance()->get_inscrit($Mon_mail);
+		F3::set('repas',$repas);
+		F3::set('crea',$crea);
+		echo Views::instance()->render('repas.html');
+      break;
+      case 'POST':
+		echo Views::instance()->render('repas.html');
+	  break;
+    }
  }
-
  function __destruct(){
 
  } 
