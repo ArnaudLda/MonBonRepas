@@ -1,8 +1,14 @@
 <?php
 class App_controller{
- 
+
  function __construct(){
   
+ }
+ function logout()
+ {
+	session_start();
+	session_destroy();
+    F3::reroute('/');
  }
  
  function home(){
@@ -65,6 +71,7 @@ class App_controller{
 		if($connect)
 		{
 			F3::set('SESSION.mail',$_POST['mail']);
+			F3::set('SESSION.id', $connect->id);
 			F3::reroute('/dashboard');
 		}
 		else
@@ -107,6 +114,8 @@ class App_controller{
  }
    function crea_repas()
  {
+	 if(!F3::get('SESSION.id'))
+      F3::reroute('/');
 	switch(F3::get('VERB'))
 	{
       case 'GET':
@@ -151,9 +160,14 @@ class App_controller{
     }
  }
    function dashboard() {
+    if(!F3::get('SESSION.id'))
+      F3::reroute('/');
 	switch(F3::get('VERB'))
 	{
       case 'GET':
+		$Mon_mail=F3::get('SESSION.mail');
+		$invit=App::instance()->get_repas($Mon_mail);
+		F3::set('repas',$invit);
 		echo Views::instance()->render('Dashboard.html');
       break;
       case 'POST':
@@ -165,17 +179,24 @@ class App_controller{
     }
  }
  
-  function profil() {
+   function profil() {
 	switch(F3::get('VERB'))
 	{
       case 'GET':
-		$profil=App::instance()->get_profil();
+		$Mon_mail=F3::get('SESSION.mail');
+		$profil=App::instance()->get_profil($Mon_mail);
 		F3::set('profil',$profil);
-		$gout=App::instance()->get_gout();
+		$gout = unserialize($profil->gout);
+		F3::set('gout',$gout);
+		
+		$aliments=App::instance()->get_aliment();
+		F3::set('aliments',$aliments);
+		
 		echo Views::instance()->render('Profil.html');
       break;
       case 'POST':
-		$profil=App::instance()->modif_profil();
+		$Mon_mail=F3::get('SESSION.mail');
+		$profil=App::instance()->modif_profil($Mon_mail);
 		F3::set('profil',$profil);
 		echo Views::instance()->render('Profil.html');
 	  break;
@@ -186,7 +207,7 @@ class App_controller{
  {
 	echo Views::instance()->render('Gest_Repas.html');
  }
- 
+
  function __destruct(){
 
  } 

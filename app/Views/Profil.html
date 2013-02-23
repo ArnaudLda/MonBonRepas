@@ -44,30 +44,41 @@
 	<form method="POST" action="">
 		<img src="<?php $avatar ?>" alt="Avatar" >
 		<input type="file" >
-		<label>Nom : <input type="text" value="<?php echo $nom; ?>" ></label>
-		<label>Prenom : <input type="text" value="<?php echo $prenom; ?>" ></label>
-		<label>Mail : <input type="mail" value="<?php echo $mail; ?>" ></label>
+		<label>Nom : <input type="text" value="<?php echo $profil->nom; ?>" ></label>
+		<label>Prenom : <input type="text" value="<?php echo $profil->prenom; ?>" ></label>
+		<label>Mail : <input type="mail" value="<?php echo $profil->mail; ?>" ></label>
 		
 		<div>DA GOOGLE MAP MOFO</div>
-		<input type="hidden" value="<?php echo $lat; ?>" >
-		<input type="hidden" value="<?php echo $lng; ?>" >
+		<input type="hidden" value="<?php //echo $profil->lat; ?>" >
+		<input type="hidden" value="<?php //echo $profil->lng; ?>" >
 		<input type="submit" value="Valider">
 	</form>
 	
 	<form method="POST" action="">
-		<label>Ancien pass : <input type="password"></label>
-		<label>Nouveau pass : <input type="password"></label>
-		<label>Retaper nouveau pass : <input type="password"></label>
+		<label>Ancien pass : <input name="old_pswd" type="password"></label>
+		<label>Nouveau pass : <input name="new_pswd" type="password"></label>
+		<label>Retaper nouveau pass : <input name="new_pswd_bis" type="password"></label>
 		<input type="submit" value="Valider">
 	</form>
 	
 	<form method="POST" action="">
-		Qu'est ce que vous n'aimez PAS :
-			<?php foreach($gout as $categorie) :?>
-				<h3><?php echo $categorie->name; ?></h3>
-				<?php foreach($categorie as $aliment) :?>
-					<label><input type="checkbox" name="<?php echo $i.'_'.$j; ?>" <?php if ($profil[$i.'_'.$j] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $aliment->name; ?></label>
-				<?php endforeach;?>
+		Ce que vous n'aimez PAS :
+			<h3>Viandes : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Viande") :?>
+					<label><input type="checkbox" name="0_<?php echo $i; ?>" <?php if ($gout['0_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			
+			<h3>Légumes : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Légume") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['1_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
 			<?php endforeach;?>
 			
 			<input type="submit" value="Valider">

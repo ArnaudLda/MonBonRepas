@@ -59,21 +59,42 @@ class App extends Prefab{
 	}
   }
   
-  function modif_profil() {
+ function modif_profil($mail) {
     $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 	
-	$serial = serialize(F3::get('POST'));
+	$mail = "utar@hotmail.fr"; // test
 	
-	return F3::get('dB')->exec('// LA REQUETE ICI BATARD');
-	
+	/*if(false//le post des infos) {
+		$info = F3::get('POST');
+		// Update des champs info
+	}
+	else if(false// le post du mdp) {
+		$info = F3::get('POST');
+		$in_db = $inscrit->load(array('mail=?', $mail);
+		
+		if($info->old_pswd == $in_db->passwd && $info->new_pswd == $info->new_pswd_bis) {
+			// Update du champ passwd
+		}
+	}
+	else if(true//si c'est le post des gouts) {
+		$serial = serialize(F3::get('POST'));
+		// Update du champ gout
+	}*/
+	return $inscrit->load(array('mail=?',$mail));
   }
   
-  function get_profil($id) {
+  function get_profil($mail) {
     $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+	$mail = "utar@hotmail.fr"; // test
 	
-	//$serialized = 'a:4:{s:3:"1_4";s:2:"on";s:3:"2_1";s:2:"on";s:3:"2_2";s:2:"on";s:3:"3_6";s:2:"on";}'; // LA REQUETE ICI pour récup les infos stockés
-	$serialized = $inscrit->load(array('id=?',$id));
-	return $tab = unserialize($serialized);
+	return $inscrit->load(array('mail=?',$mail));
+  }
+  
+  function get_aliment() {
+	$aliment=new DB\SQL\Mapper(F3::get('dB'),'aliments');
+	$aliments = $aliment->find();
+	
+	return $aliments;
   }
   
   function get_gout() {
@@ -84,7 +105,8 @@ class App extends Prefab{
   }
   
   function connect($mail, $passwd) {
-	return F3::get('dB')->exec("select nom, prenom  from inscrit where mail='$mail' and passwd='$passwd'");
+	$connect=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+	return $connect->load(array('mail=? and passwd=?',$mail,$passwd));
   }
   function get_repas($Mon_mail) {
 	$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
