@@ -180,6 +180,8 @@ class App_controller{
  }
  
    function profil() {
+   if(!F3::get('SESSION.id'))
+      F3::reroute('/');
 	switch(F3::get('VERB'))
 	{
       case 'GET':
