@@ -56,7 +56,39 @@ class Profil extends Prefab{
 
 		return $aliments;
 	}
+	function get_contact($session_id) {
+		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+		$session_id = 1; // test
+		
+		$infos = $inscrit->load(array('id=?',$session_id));
+		$contact = $infos->contact;
+		
+		return unserialize($contact);
+	}
 	
+	function modif_contact($session_id) {
+		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+		$session_id = 1; // test
+		
+		$posted = F3::get('POST');
+		
+		foreach ($posted as $i => $item) {
+			if(!$item){
+				unset($posted[$i]);
+			}
+		}
+		
+		$posted = array_values($posted);
+		
+		$contact = serialize($posted);
+
+		F3::get('dB')->exec("UPDATE inscrit SET contact='$contact' WHERE id='$session_id' ");
+
+		$infos = $inscrit->load(array('id=?',$session_id));
+		$contact = $infos->contact;
+		
+		return unserialize($contact);
+	}
 	function __destruct(){
 
 	}

@@ -95,7 +95,24 @@ class Profil_controller{
 			break;
 		}
 	}
-	
+	function contact() {
+		switch(F3::get('VERB')) {
+			case 'GET':
+				$session_id=F3::get('SESSION.id');
+				$contact=Profil::instance()->get_contact($session_id);
+				F3::set('contact',$contact);
+
+				echo Views::instance()->render('contact.html');
+			break;
+			case 'POST':
+				$session_id=F3::get('SESSION.id');
+				$contact=Profil::instance()->modif_contact($session_id);
+				F3::set('contact',$contact);
+				
+				echo Views::instance()->render('contact.html');
+			break;
+		}
+	}
 	function __destruct(){
 
 	} 
