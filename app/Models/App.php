@@ -59,30 +59,6 @@ class App extends Prefab{
 	}
   }
   
- function modif_profil($mail) {
-    $inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-	
-	$mail = "utar@hotmail.fr"; // test
-	
-	/*if(false//le post des infos) {
-		$info = F3::get('POST');
-		// Update des champs info
-	}
-	else if(false// le post du mdp) {
-		$info = F3::get('POST');
-		$in_db = $inscrit->load(array('mail=?', $mail);
-		
-		if($info->old_pswd == $in_db->passwd && $info->new_pswd == $info->new_pswd_bis) {
-			// Update du champ passwd
-		}
-	}
-	else if(true//si c'est le post des gouts) {
-		$serial = serialize(F3::get('POST'));
-		// Update du champ gout
-	}*/
-	return $inscrit->load(array('mail=?',$mail));
-  }
-  
   function connect($mail, $passwd) {
 	$connect=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 	return $connect->load(array('mail=? and passwd=?',$mail,$passwd));
@@ -116,6 +92,10 @@ class App extends Prefab{
 		return F3::get('dB')->exec("UPDATE repas SET statut='$reponse' WHERE id='$id'");
 	}
   }
+  function flux_repas($mail)
+  {
+	return F3::get('dB')->exec("select log_invit, statut from repas where log_crea='$mail' and statut<>'non_lu'");
+  }
   function getNext($id){  
     return F3::get('dB')->exec("select id, title from location where id =(select min(id) from location where id > ".$id.")");
   }
@@ -123,7 +103,6 @@ class App extends Prefab{
   function getPrev($id){
     return F3::get('dB')->exec("select id, title from location where id =(select max(id) from location where id < ".$id.")");
   }
-  
 
   function __destruct(){
 

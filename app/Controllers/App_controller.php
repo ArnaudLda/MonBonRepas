@@ -162,8 +162,47 @@ class App_controller{
    function dashboard() {
     if(!F3::get('SESSION.id'))
       F3::reroute('/');
-	  
-	echo Views::instance()->render('Dashboard.html');
+	switch(F3::get('VERB'))
+	{
+      case 'GET':
+		$Mon_mail=F3::get('SESSION.mail');
+		$flux=App::instance()->flux_repas($Mon_mail);
+		if($flux)
+		{
+			for($xx=0;$xx<count($flux);$xx++)
+			{
+				$mail=$flux[$xx]['log_invit'];
+				$infos[$xx]=App::instance()->get_inscrit($mail);
+			}
+			F3::set('flux',$flux);
+			F3::set('infos',$infos);
+			echo Views::instance()->render('Dashboard.html');
+		}
+		else
+		{
+			echo Views::instance()->render('Dashboard.html');
+		}
+      break;
+      case 'POST':
+		$Mon_mail=F3::get('SESSION.mail');
+		$flux=App::instance()->flux_repas($Mon_mail);
+		if($flux)
+		{
+			for($xx=0;$xx<count($flux);$xx++)
+			{
+				$mail=$flux[$xx]['log_invit'];
+				$infos[$xx]=App::instance()->get_inscrit($mail);
+			}
+			F3::set('flux',$flux);
+			F3::set('infos',$infos);
+			echo Views::instance()->render('Dashboard.html');
+		}
+		else
+		{
+			echo Views::instance()->render('Dashboard.html');
+		}
+	  break;
+    }  
  }
  
   function gest_repas()
