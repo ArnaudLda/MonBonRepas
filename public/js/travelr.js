@@ -32,7 +32,6 @@ function drawMap(position){
 	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
 	
 	var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	console.log(LatLng);
 	$('#lat').val(LatLng.hb);
 	$('#lng').val(LatLng.ib);
 	
@@ -71,8 +70,6 @@ function drawMap(position){
 	google.maps.event.addListener(marker,'dragend', function(){
 		$('#lat').val(this.getPosition().lat()); 
 		$('#lng').val(this.getPosition().lng()); 
-		console.log($('#lat').val());
-		console.log($('#lng').val());
 		var LatLng = new google.maps.LatLng($('#lat').val(),$('#lng').val());
 		var lieu = new google.maps.Geocoder();
 		var GeoReverse=lieu.geocode({'latLng': LatLng}, function(results, status) 
@@ -94,8 +91,6 @@ function drawMap2(){
 	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
 	
 	var LatLng = new google.maps.LatLng($('#lat').val(), $('#lng').val());
-	console.log($('#lat').val());
-	console.log(LatLng);
 	
 	var mapOptions = {
     zoom: 11,
@@ -112,7 +107,6 @@ function drawMap2(){
   map.mapTypes.set('travelr', travelrType);
   map.setMapTypeId('travelr');
 	var markerLatLng=LatLng;
-	console.log(markerLatLng);
     var marker = new google.maps.Marker({
           position: markerLatLng,
           map: map,
