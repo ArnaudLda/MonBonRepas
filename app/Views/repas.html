@@ -47,6 +47,12 @@
       <h1>Message</h1><br/>
 	  <h2>Invitation de <?php echo $crea->nom; echo " ".$crea->prenom; ?></h2><br/>
 	  <h2>Son adresse mail est <?php echo $repas->log_crea; ?></h2><br/>
+	   <fieldset class="geocoder">
+				<a href="" id="search-position">cliquez</a>
+				<div id="map_canvas"></div>
+				<input type="hidden" name="lat" value="" id="lat"/>
+				<input type="hidden" name="lng" value="" id="lng"/>
+		</fieldset>
 	  <a href="response?action=<?php echo $repas->id; ?>&rep=accepter">ACCEPTER</a><br/><a href="response?action=<?php echo $repas->id; ?>&rep=refuser">REFUSER</a>
   </section>
   <footer>

@@ -16,7 +16,7 @@ class App extends Prefab{
     }
     return $location->load(array('id=?',$id));
   }
-  function crea_repas($mail, $Mon_mail)
+  function crea_repas($mail,$lat,$lng,$position,$Mon_mail)
   {
 	
 	foreach ($mail as $invit)
@@ -40,6 +40,9 @@ class App extends Prefab{
 		
 		$repas->log_crea=$Mon_mail;
 		$repas->log_invit=$invit;
+		$repas->lat=$lat;
+		$repas->lng=$lng;
+		$repas->Lib_lieu=$position;
 		$repas->save();
 	}
   }

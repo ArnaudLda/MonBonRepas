@@ -153,7 +153,7 @@ class App_controller{
 		else
 		{
 			$Mon_mail=F3::get('SESSION.mail');
-			App::instance()->crea_repas($_POST['mail'],$Mon_mail);
+			App::instance()->crea_repas($_POST['mail'],$_POST['lat'],$_POST['lng'],$_POST['position'],$Mon_mail);
 			echo Views::instance()->render('Crea_Repas.html');
 		}
 		break;

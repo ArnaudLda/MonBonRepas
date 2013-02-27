@@ -1,56 +1,116 @@
+var map;
+var image='/GitHub/MonBonRepas/public/css/img/marker.png';
+
 $(function(){
-	$.getJSON(location.href)
-	.success(function(response){
-		slide(response.pictures);
-		drawMap(response.coords); 
-	})
-	$('.main .map, .map .close').bind('click',toggleMap);
+if(navigator.geolocation) 
+			{
+			  navigator.geolocation.getCurrentPosition(drawMap,
+														geoError,
+														{enableHighAccuracy:true});
+			}
+			// Si le navigateur n'accepte pas la geoloc
+			else {MAP.handleNoGeolocation(false);}
+	//drawMap();
 	
 });
 
-function slide(data) {
-	$.supersized({
-		slide_interval : 2000,	
-		transition : 1, 			
-		transition_speed :1000,
-		horizontal_center : 1,
-		image_path : 'public/images/',
-		slides : data
-	});
-}
-
-
-
-
-
-function toggleMap(){
-	$('div.map').toggleClass('on');
-	return false;
-}
-
-
-
-function drawMap(coords){
+function drawMap(position){
 	
-	var LatLng=new google.maps.LatLng(coords.lat,coords.lng);
-	
+	var travelrStyle = [{featureType: "all"}];
+  var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
+	/*var LatLng=new google.maps.LatLng($('#lat').val(),$('#lng').val());
+	if(!($('#lat').val())&&!($('#lng').val()))
+	{*/
+		var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		$('#lat').val(LatLng.hb);
+		$('#lng').val(LatLng.ib);
+	//}
+	var lieu = new google.maps.Geocoder();
+	var GeoReverse=lieu.geocode({'latLng': LatLng}, function(results, status) 
+		{
+			if (status == google.maps.GeocoderStatus.OK) 
+			{
+				if (results[1]) 
+				{
+					$('#position').val(results[1].formatted_address);
+				}
+			}
+		});
 	var mapOptions = {
-    zoom: 9,
+    zoom: 11,
     mapTypeControl: false,
     streetViewControl: false,
     zoomControl:false,
     scaleControl: false,
+	scrollwheel:false,
     center: LatLng,
-		styles:[{"stylers": [{ "saturation": -100 }]}],
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'travelr']}
   };
 	
-	var map = new google.maps.Map(document.getElementById('map_canvas'),mapOptions);
-  var image='public/css/img/marker.png';
-  var marker = new google.maps.Marker({
-          position: LatLng,
+  map = new google.maps.Map(document.getElementById('map_canvas'),mapOptions);
+  map.mapTypes.set('travelr', travelrType);
+  map.setMapTypeId('travelr');
+	var markerLatLng=LatLng;
+    var marker = new google.maps.Marker({
+          position: markerLatLng,
           map: map,
-          icon:image
+          icon:image,
+		  draggable:true
       });
+	google.maps.event.addListener(marker,'dragend', function(){
+		$('#lat').val(this.getPosition().lat()); 
+		$('#lng').val(this.getPosition().lng()); 
+		console.log($('#lat').val());
+		console.log($('#lng').val());
+		var LatLng = new google.maps.LatLng($('#lat').val(),$('#lng').val());
+		var lieu = new google.maps.Geocoder();
+		var GeoReverse=lieu.geocode({'latLng': LatLng}, function(results, status) 
+		{
+			if (status == google.maps.GeocoderStatus.OK) 
+			{
+				if (results[1]) 
+				{
+				  $('#position').val(results[1].formatted_address);
+				}
+			}
+		});
+	});
+	geoCoding(marker);												
 }
 
+function geoCoding(marker) {
+	$('#search-position').bind('click',function(e){
+		var address = $('#position');
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({"address":address.val()}, function(data,status){
+			if(status=='OK'){
+				marker.setMap(null);
+				map.setCenter(data[0].geometry.location);
+				marker = new google.maps.Marker({position: data[0].geometry.location,map: map,icon:image,draggable:true});
+				$('#lat').val(data[0].geometry.location.lat());
+				$('#lng').val(data[0].geometry.location.lng());
+				google.maps.event.addListener(marker,'dragend', function(){
+				  $('#lat').val(this.getPosition().lat()); 
+				$('#lng').val(this.getPosition().lng()); 
+				});
+			}
+		});
+	
+		return false;
+			});
+	
+};
+    function geoError() {MAP.handleNoGeolocation(true);}
+    function handleNoGeolocation(errorFlag) 
+	{
+        if (errorFlag) {var content = 'Error: The Geolocation service failed.';} 
+		else {var content = 'Error: Your browser doesn\'t support geolocation.';}
+        var options = 
+		{
+          map: MAP.map,
+          position: new google.maps.LatLng(60, 105),
+          content: content
+        };
+        var infowindow = new google.maps.InfoWindow(options);
+        MAP.map.setCenter(options.position);
+    }
