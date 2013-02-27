@@ -236,7 +236,7 @@ class App_controller{
 	    $Mon_mail=F3::get('SESSION.mail');
 		$id=$_GET["action"];
 		$repas=App::instance()->get_repas($id);
-		$crea=App::instance()->get_inscrit($Mon_mail);
+		$crea=App::instance()->get_inscrit($repas->log_crea);
 		F3::set('repas',$repas);
 		F3::set('crea',$crea);
 		echo Views::instance()->render('repas.html');

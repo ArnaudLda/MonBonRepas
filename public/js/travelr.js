@@ -2,29 +2,40 @@ var map;
 var image='/GitHub/MonBonRepas/public/css/img/marker.png';
 
 $(function(){
-if(navigator.geolocation) 
-			{
-			  navigator.geolocation.getCurrentPosition(drawMap,
-														geoError,
-														{enableHighAccuracy:true});
-			}
-			// Si le navigateur n'accepte pas la geoloc
-			else {MAP.handleNoGeolocation(false);}
-	//drawMap();
-	
+	if(document.getElementById('map_canvas'))
+	{
+		if(navigator.geolocation) 
+		{
+		  navigator.geolocation.getCurrentPosition(drawMap,
+													geoError,
+													{enableHighAccuracy:true});
+		}
+		// Si le navigateur n'accepte pas la geoloc
+		else {handleNoGeolocation(false);}
+	}
+	else if(document.getElementById('lieu_repas'))
+	{
+		if(navigator.geolocation) 
+		{
+		  navigator.geolocation.getCurrentPosition(drawMap2,
+													geoError,
+													{enableHighAccuracy:true});
+		}
+		// Si le navigateur n'accepte pas la geoloc
+		else {handleNoGeolocation(false);}
+	}
 });
 
 function drawMap(position){
 	
 	var travelrStyle = [{featureType: "all"}];
-  var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
-	/*var LatLng=new google.maps.LatLng($('#lat').val(),$('#lng').val());
-	if(!($('#lat').val())&&!($('#lng').val()))
-	{*/
-		var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		$('#lat').val(LatLng.hb);
-		$('#lng').val(LatLng.ib);
-	//}
+	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
+	
+	var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	console.log(LatLng);
+	$('#lat').val(LatLng.hb);
+	$('#lng').val(LatLng.ib);
+	
 	var lieu = new google.maps.Geocoder();
 	var GeoReverse=lieu.geocode({'latLng': LatLng}, function(results, status) 
 		{
@@ -77,7 +88,37 @@ function drawMap(position){
 	});
 	geoCoding(marker);												
 }
-
+function drawMap2(){
+	
+	var travelrStyle = [{featureType: "all"}];
+	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
+	
+	var LatLng = new google.maps.LatLng($('#lat').val(), $('#lng').val());
+	console.log($('#lat').val());
+	console.log(LatLng);
+	
+	var mapOptions = {
+    zoom: 11,
+    mapTypeControl: false,
+    streetViewControl: false,
+    zoomControl:false,
+    scaleControl: false,
+	scrollwheel:false,
+    center: LatLng,
+    mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'travelr']}
+  };
+	
+  map = new google.maps.Map(document.getElementById('lieu_repas'),mapOptions);
+  map.mapTypes.set('travelr', travelrType);
+  map.setMapTypeId('travelr');
+	var markerLatLng=LatLng;
+	console.log(markerLatLng);
+    var marker = new google.maps.Marker({
+          position: markerLatLng,
+          map: map,
+          icon:image
+      });											
+}
 function geoCoding(marker) {
 	$('#search-position').bind('click',function(e){
 		var address = $('#position');

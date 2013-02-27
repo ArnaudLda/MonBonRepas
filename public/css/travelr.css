@@ -34,7 +34,7 @@ section div.frame.on{left:0;}
 section div.frame{width:60%;left:-85%;-webkit-transition:left .7s ease;}
 section .frame .close{right:-1.6em;}
 #map_canvas{width:100%;min-height:25em;}
-
+#lieu_repas{width:100%;min-height:25em;}
 section div.portfolio{top:5em;}
 
 .polaroid{background-color:#fff;padding:1em;float:left;margin:1em;}
@@ -65,7 +65,7 @@ footer a:hover::before{height:66px;}
 
 fieldset{border:none;}
 input, textarea{display:block;width:80%;line-height:1.5em;font-family:'DIN',Arial,sans-serif;font-size:1.5em;color:#333;border:none;border-radius:5px;padding:0 .5em;margin:1em 0 1em 0;}
-input[name='position']{width:30%;display:inline;margin-right:1em;}
+input[name='position']{width:50%;display:inline;margin-right:1em;}
 input[type='submit']{width:auto;background-color:#fff;}
 .admin #map_canvas{width:80%;height:30em;background:#fff;margin:1em 0 1em 0;}
 .admin p.pictures {width:300px;margin:0;position:relative;}
