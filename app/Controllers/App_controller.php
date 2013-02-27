@@ -119,6 +119,10 @@ class App_controller{
 	switch(F3::get('VERB'))
 	{
       case 'GET':
+		$contacts = App::instance()->get_contact(F3::get('SESSION.id'));
+		
+		F3::set('contacts', $contacts);
+		
         echo Views::instance()->render('Crea_Repas.html');
       break;
       case 'POST':
@@ -153,7 +157,7 @@ class App_controller{
 		else
 		{
 			$Mon_mail=F3::get('SESSION.mail');
-			App::instance()->crea_repas($_POST['mail'],$_POST['lat'],$_POST['lng'],$_POST['position'],$Mon_mail);
+			App::instance()->crea_repas($_POST['mail'],$_POST['lat'],$_POST['lng'],$_POST['position'],$Mon_mail,$_POST['date'],$_POST['contact']);
 			echo Views::instance()->render('Crea_Repas.html');
 		}
 		break;

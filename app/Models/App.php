@@ -16,7 +16,7 @@ class App extends Prefab{
     }
     return $location->load(array('id=?',$id));
   }
-  function crea_repas($mail,$lat,$lng,$position,$Mon_mail)
+  function crea_repas($mail,$lat,$lng,$position,$Mon_mail, $date, $contacts)
   {
 	
 	foreach ($mail as $invit)
@@ -42,6 +42,33 @@ class App extends Prefab{
 		$repas->log_invit=$invit;
 		$repas->lat=$lat;
 		$repas->lng=$lng;
+		$repas->date=$date;
+		$repas->Lib_lieu=$position;
+		$repas->save();
+	}
+	foreach ($contacts as $contact){
+		$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
+		/*$cle=md5(microtime(TRUE)*100000);
+		$dest=$invit;
+		$sujet = "Invitation à mon repas" ;
+		$entete = "From: MonBonRepas@votresite.com" ;
+		$message = 'Vous êtes invité à un repas,
+
+		Pour valider votre venue, veuillez cliquer sur le lien ci dessous
+		ou copier/coller dans votre navigateur internet.
+
+		http://localhost/GitHub/MonBonRepas/connexion
+
+
+		---------------
+		Ceci est un mail automatique, Merci de ne pas y répondre.';
+		mail($dest, $sujet, $message, $entete) ; // Envoi du mail*/
+		
+		$repas->log_crea=$Mon_mail;
+		$repas->log_invit=$contact;
+		$repas->lat=$lat;
+		$repas->lng=$lng;
+		$repas->date=$date;
 		$repas->Lib_lieu=$position;
 		$repas->save();
 	}
@@ -60,6 +87,18 @@ class App extends Prefab{
 		$inscrit->copyFrom('POST');
 		$inscrit->save();
 	}
+  }
+  
+  function get_contact($session_id) {
+	$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+	
+	$session_id = 1; // test
+	
+	$infos = $inscrit->load(array('id=?',$session_id));
+	$contact = $infos->contact;
+	
+	return unserialize($contact);
+	
   }
   
   function connect($mail, $passwd) {

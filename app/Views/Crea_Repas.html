@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="public/js/lib/supersized.3.2.7.js"></script>
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script type="text/javascript" src="public/js/travelr.js"></script>
+  <script type="text/javascript" src="public/js/calendrier.js"></script>
 	
 </head>
 <body>
@@ -54,6 +55,23 @@
 			 </fieldset>
 			<label for="mail">Adresse mail de vos invités</label> : <input type="email" name="mail[]" placeholder="adresse mail" autocomplete="off" /><?php echo $error; ?> <br/>
 			<a href="#" id="button">+</a>
+			
+			<label><input type="text" onclick="ds_sh(this);" name="date" placeholder="Entrez une date"></label>
+			
+			<!-- Tableau obligatoire ! C'est lui qui contiendra le calendrier ! -->
+			<table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;">
+				<tr>
+					<td id="ds_calclass"></td>
+				</tr>
+			</table>
+			
+			<p>Liste de contact</p>
+			<div>
+				<?php foreach($contacts as $contact) : ?>
+					<label><?php echo $contact; ?> : <input type="checkbox" value="<?php echo $contact; ?>" name="contact[]"></label>
+				<?php endforeach; ?>
+			</div>
+			
 			<input type="submit" value="Envoyer" />
 	  </form >
   </section>
