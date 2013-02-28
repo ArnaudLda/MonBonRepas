@@ -10,13 +10,18 @@ class Repas extends Prefab{
 	
 	/* Création de repas */
 	
-	function crea_repas($mail,$lat,$lng,$position,$Mon_mail, $date) {
+	function crea_repas($mail,$lat,$lng,$position,$my_id, $date) {
 		
 		
+		
+		/* PAR ICI BATARD
+			$id_repas = rand(0,1000);
+			
+			$repas->load(array('id_repas',$id_repas));*/
 		
 		foreach ($mail as $invit) {
+			$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 			if ($invit) {
-				$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 				/*$cle=md5(microtime(TRUE)*100000);
 				$dest=$invit;
 				$sujet = "Invitation à mon repas" ;
@@ -33,7 +38,7 @@ class Repas extends Prefab{
 				Ceci est un mail automatique, Merci de ne pas y répondre.';
 				mail($dest, $sujet, $message, $entete) ; // Envoi du mail*/
 				
-				$repas->log_crea=$Mon_mail;
+				$repas->log_crea=$my_id;
 				$repas->log_invit=$invit;
 				$repas->lat=$lat;
 				$repas->lng=$lng;
@@ -42,6 +47,17 @@ class Repas extends Prefab{
 				$repas->save();
 			}
 		}
+	}
+	
+	/* Récupération de l'id par rapport au mail */
+	
+	function mail_to_id($mail) {
+		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
+		$id = $inscrit->load(array('mail=?',$mail));
+		if(!$id) {
+			return false;
+		}
+		return $id;
 	}
 	
 	/* Récupération des contacts */

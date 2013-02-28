@@ -17,16 +17,18 @@ class Repas_controller{
 				echo Views::instance()->render('Crea_Repas.html');
 			break;
 			case 'POST':
-				
-				$vide = false;
-				foreach($_POST['mail'] as $invit) { 
+				$vide = true;
+				foreach($_POST['mail'] as $invit) {
 					$check=array('mail'=>'Audit->email');
 					$good=Datas::instance()->check($invit,$check);
-					if(!$invit){
-						$vide = true;
+					if($invit == F3::get('SESSION.mail')) {
+						$invit = '';
+					}
+					
+					if($invit){
+						$vide = false;
 					}
 				}
-				
 				if($vide && isset($_POST['contact'])){ 
 					$mails = $_POST['contact'];
 				}
@@ -53,8 +55,18 @@ class Repas_controller{
 					$mails = array_merge($_POST['mail'],$_POST['contact']);
 				}
 				
-				$Mon_mail = F3::get('SESSION.mail');
-				Repas::instance()->crea_repas($mails,$_POST['lat'],$_POST['lng'],$_POST['position'],$Mon_mail,$_POST['date']);
+				// ICI !
+				$size = sizeof($mails);
+				
+				for ($i=0; $i<$size; $i++) {
+					$id_from_mail = Repas::instance()->mail_to_id($mails[$i]);
+					if($id_from_mail) {
+						$mails[$i] = $id_from_mail->id;
+					}
+				}
+				
+				$my_id = F3::get('SESSION.id');
+				Repas::instance()->crea_repas($mails,$_POST['lat'],$_POST['lng'],$_POST['position'],$my_id,$_POST['date']);
 				$contacts = Repas::instance()->get_contact(F3::get('SESSION.id'));
 				F3::set('contacts', $contacts);
 				echo Views::instance()->render('Crea_Repas.html');
@@ -69,14 +81,14 @@ class Repas_controller{
 			F3::reroute('/');
 		switch(F3::get('VERB')) { // faire sauter le switch si ya pas de différence
 			case 'GET':
-				$Mon_mail=F3::get('SESSION.mail');
-				$invit=Repas::instance()->get_liste_repas($Mon_mail);
+				$Mon_mail=F3::get('SESSION.mail'); // USE ID
+				$invit=Repas::instance()->get_liste_repas($Mon_mail); // USE ID
 				F3::set('repas',$invit);
 				echo Views::instance()->render('Gest_Repas.html');
 			break;
 			case 'POST':
-				$Mon_mail=F3::get('SESSION.mail');
-				$invit=Repas::instance()->get_liste_repas($Mon_mail);
+				$Mon_mail=F3::get('SESSION.mail'); // USE ID
+				$invit=Repas::instance()->get_liste_repas($Mon_mail); // USE ID
 				F3::set('repas',$invit);
 				echo Views::instance()->render('Gest_Repas.html');
 			break;
@@ -90,7 +102,7 @@ class Repas_controller{
 			F3::reroute('/');
 		switch(F3::get('VERB')) {
 			case 'GET':
-				$Mon_mail=F3::get('SESSION.mail');
+				$Mon_mail=F3::get('SESSION.mail'); // USE ID => dafuq tu get le mail et tu l'utilise pas ?
 				$id=$_GET["action"];
 				$repas=Repas::instance()->get_repas($id);
 				$crea=App::instance()->get_inscrit($repas->log_crea);
@@ -111,12 +123,12 @@ class Repas_controller{
 			F3::reroute('/');
 		switch(F3::get('VERB')) {
 			case 'GET':
-				$Mon_mail=F3::get('SESSION.mail');
+				$Mon_mail=F3::get('SESSION.mail'); // USE ID
 				$id=$_GET["action"];
 				$reponse=$_GET["rep"];
 				$rep=Repas::instance()->modif_statut_repas($reponse,$id);
 				$repas=Repas::instance()->get_repas($id);
-				$crea=App::instance()->get_inscrit($Mon_mail);
+				$crea=App::instance()->get_inscrit($Mon_mail); // USE ID
 				F3::set('repas',$repas);
 				F3::set('crea',$crea);
 				echo Views::instance()->render('repas.html');

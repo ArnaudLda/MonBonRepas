@@ -82,8 +82,8 @@ class App_controller{
 			F3::reroute('/');
 		switch(F3::get('VERB')) {
 			case 'GET':
-				$Mon_mail=F3::get('SESSION.mail');
-				$flux=Repas::instance()->flux_repas($Mon_mail);
+				$Mon_mail=F3::get('SESSION.mail'); // USE ID
+				$flux=Repas::instance()->flux_repas($Mon_mail); // USE ID
 				if($flux) {
 					for($xx=0;$xx<count($flux);$xx++) {
 						$mail=$flux[$xx]['log_invit'];
@@ -98,8 +98,8 @@ class App_controller{
 				}
 			break;
 			case 'POST':
-				$Mon_mail=F3::get('SESSION.mail');
-				$flux=Repas::instance()->flux_repas($Mon_mail);
+				$Mon_mail=F3::get('SESSION.mail'); // USE ID
+				$flux=Repas::instance()->flux_repas($Mon_mail); // USE ID
 				if($flux) {
 					for($xx=0;$xx<count($flux);$xx++) {
 						$mail=$flux[$xx]['log_invit'];
