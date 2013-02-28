@@ -6,7 +6,7 @@ class Profil_controller{
 	}
 	
 	function profil() {
-		switch(F3::get('VERB')) {
+		switch(F3::get('VERB')) { // faire sauter le switch
 			case 'GET':
 				$session_id=F3::get('SESSION.id');
 				$profil=Profil::instance()->get_profil($session_id);
@@ -95,6 +95,7 @@ class Profil_controller{
 			break;
 		}
 	}
+	
 	function contact() {
 		switch(F3::get('VERB')) {
 			case 'GET':
@@ -113,6 +114,7 @@ class Profil_controller{
 			break;
 		}
 	}
+	
 	function __destruct(){
 
 	} 
