@@ -155,7 +155,11 @@ class Repas_controller{
 				}
 			break;
 			case 'POST':
-				// update repas pour le créateur
+				$id=$_GET["action"];
+				$repas=Repas::instance()->get_repas($id);// ID
+				$crea=App::instance()->get_inscrit($repas->log_crea);
+				F3::set('repas',$repas);
+				F3::set('crea',$crea);
 				echo Views::instance()->render('repas.html');
 			break;
 		}
