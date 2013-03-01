@@ -70,3 +70,4 @@ input[type='submit']{width:auto;background-color:#fff;}
 .admin #map_canvas{width:80%;height:30em;background:#fff;margin:1em 0 1em 0;}
 .admin p.pictures {width:300px;margin:0;position:relative;}
 .admin p.pictures a {position:absolute;right:0;}
+#com_repas{float: left;margin-left: 150px;width: 40%;}
