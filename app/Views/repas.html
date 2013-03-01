@@ -43,17 +43,36 @@
   </header>
   <section>
     
+	Ce que vos invités n'aiment PAS :
+			<h3>Viandes : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Viande") : ?>
+					<p style=" <?php if (!$gout['0_'.$i] == 'on') { echo 'display : none;'; } ?>" ><?php echo $item->aliment; ?></p>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			
+			<h3>Légumes : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Légume") : ?>
+					<p style=" <?php if (!$gout['1_'.$i] == 'on') { echo 'display : none;'; } ?>" ><?php echo $item->aliment; ?></p>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+	
     <div class="main collapse">
       <h1>Message</h1><br/>
 	  <h2>Invitation de <?php echo $crea->nom; echo " ".$crea->prenom; ?></h2><br/>
-	  <h2>Son adresse mail est <?php echo $repas->log_crea; ?></h2><br/>
+	  <h2>Son adresse mail est <?php echo $crea->mail; ?></h2><br/>
 	  <h2>Le repas aura lieu à <?php echo $repas->Lib_lieu; ?></h2><br/>
 	   <fieldset class="geocoder">
 				<div id="lieu_repas"></div>
 				<input type="hidden" name="lat" value="<?php echo $repas->lat; ?>" id="lat"/>
 				<input type="hidden" name="lng" value="<?php echo $repas->lng; ?>" id="lng"/>
 		</fieldset>
-	  <a href="response?action=<?php echo $repas->id; ?>&rep=accepter">ACCEPTER</a><br/><a href="response?action=<?php echo $repas->id; ?>&rep=refuser">REFUSER</a>
+	  <a href="change_statut?action=<?php echo $repas->id; ?>&rep=accepter">ACCEPTER</a><br/><a href="change_statut?action=<?php echo $repas->id; ?>&rep=refuser">REFUSER</a>
   </section>
   <footer>
     <a href="we-live-blue/">We think blue</a>

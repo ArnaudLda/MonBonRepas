@@ -50,31 +50,58 @@
 	  <h2>Invitations acceptées :</h2>
 	  <?php foreach($repas as $invits): ?>
 		<?php 
-			$id=$invits->id; 
+			$id=$invits->id_repas;
 			$statut=$invits->statut;
 			if($statut=="accepter") 
 			{?>
-		 <p><a href="repas?action=<?php echo $id; ?>"><?php echo $invits->log_crea; ?></a></p>
+		 <p><a href="repas?action=<?php echo $id; ?>">
+		 <?php 
+			foreach($contact as $contacts)
+				{
+					if(($contacts->id)==($invits->log_crea)) // ID
+					{
+						echo $contacts->mail; 
+					}
+				}
+		?></a></p>
 		  <?php }?>
 	 <?php endforeach; ?>
 	 <h2>Invitations refusées :</h2>
 	 <?php foreach($repas as $invits): ?>
 		  <?php 
-			$id=$invits->id; 
+			$id=$invits->id_repas; 
 			$statut=$invits->statut;
 			if($statut=="refuser") 
 			{?>
-			<p><a href="repas?action=<?php echo $id; ?>"><?php echo $invits->log_crea; ?></a></p>
+			<p><a href="repas?action=<?php echo $id; ?>">
+			<?php 
+				foreach($contact as $contacts)
+				{
+					if(($contacts->id)==($invits->log_crea)) // ID
+					{
+						echo $contacts->mail; 
+					}
+				}
+			?></a></p>
 			<?php }?>
 	 <?php endforeach; ?>
 	 <h2>Invitations non lues :</h2>
 	  <?php foreach($repas as $invits): ?>
 		<?php	
-			$id=$invits->id; 
+			$id=$invits->id_repas; 
 			$statut=$invits->statut;
 			if($statut=="non_lu") 
 			{?>
-		 <p><a href="repas?action=<?php echo $id; ?>"><?php echo $invits->log_crea; ?></a></p>
+		 <p><a href="repas?action=<?php echo $id; ?>">
+		 <?php 
+			foreach($contact as $contacts)
+				{
+					if(($contacts->id)==($invits->log_crea)) // ID
+					{
+						echo $contacts->mail; 
+					}
+				}
+		 ?></a></p>
 		  <?php }?>
       <?php endforeach; ?>
 	</section>
@@ -83,14 +110,6 @@
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
-  <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
-  </script>
   
 </body>
 </html>
-
-
-
-

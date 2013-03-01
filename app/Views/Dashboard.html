@@ -49,17 +49,17 @@
 	  <h2>Flux d'actualités </h2>
 	  <?php foreach($flux as $flux_repas)
 	  {			
-				$mail_invite=$flux_repas['log_invit'];
+				$id_invite=$flux_repas->log_invit;
 				foreach($infos as $info_user)
 				{
-					$mail=$info_user->mail;
-					if($mail_invite==$mail)
+					$id=$info_user->id;
+					if($id_invite==$id)
 					{
 						$nom=$info_user->nom;
 						$prenom=$info_user->prenom;
 					}
 				}
-				$statut=$flux_repas['statut'];
+				$statut=$flux_repas->statut;
 				if($statut=="accepter")
 				{
 					$statut="accepté";

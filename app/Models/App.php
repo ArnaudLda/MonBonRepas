@@ -12,10 +12,8 @@ class App extends Prefab{
 	
 	function create($mail) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		$exist=false;
 		if($inscrit->find(array('mail=?',$mail))) {
-			$exist=true;
-			return $exist;
+			return true;
 		}
 		else {
 			$inscrit->copyFrom('POST');
@@ -30,16 +28,11 @@ class App extends Prefab{
 		return $connect->load(array('mail=? and passwd=?',$mail,$passwd));
 	}
 	
-	function locationPictures($idLocation){ // useless ?
-		$pictures=new DB\SQL\Mapper(F3::get('dB'),'pictures');
-		return $pictures->find(array('idLocation=?',$idLocation));
-	}
-	
 	/* Récupération */
 	
-	function get_inscrit($mail) {
+	function get_inscrit($id) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		return $inscrit->load(array('mail=?',$mail));
+		return $inscrit->load(array('id=?',$id));
 	}
 
 	function __destruct(){

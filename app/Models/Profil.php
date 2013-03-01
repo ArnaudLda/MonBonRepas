@@ -52,10 +52,10 @@ class Profil extends Prefab{
   
 	function get_aliment() {
 		$aliment=new DB\SQL\Mapper(F3::get('dB'),'aliments');
-		$aliments = $aliment->find();
-
-		return $aliments;
+		
+		return $aliment->find();
 	}
+	
 	function get_contact($session_id) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 		$session_id = 1; // test

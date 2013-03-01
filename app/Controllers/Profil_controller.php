@@ -34,7 +34,7 @@ class Profil_controller{
 		}
 	}
 	
-	function info() {
+	function profil_info() {
 		switch(F3::get('VERB')) {
 			case 'GET':
 				F3::reroute('/Profil');
@@ -57,7 +57,7 @@ class Profil_controller{
 		}
 	}
 	
-	function pswd() {
+	function profil_pswd() {
 		switch(F3::get('VERB')) {
 			case 'GET':
 				F3::reroute('/Profil');
@@ -80,7 +80,7 @@ class Profil_controller{
 		}
 	}
 	
-	function gout() {
+	function profil_gout() {
 		switch(F3::get('VERB')) {
 			case 'GET':
 				F3::reroute('/Profil');

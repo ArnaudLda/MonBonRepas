@@ -69,8 +69,10 @@ class App_controller{
 					echo Views::instance()->render('inscription.html');
 					return;
 				}
-				else
+				else {
+					// modifier la table repas ici
 					F3::reroute('/connexion');
+				}
 			break;
 		}
 	}
@@ -82,8 +84,8 @@ class App_controller{
 			F3::reroute('/');
 		switch(F3::get('VERB')) {
 			case 'GET':
-				$Mon_mail=F3::get('SESSION.mail'); // USE ID
-				$flux=Repas::instance()->flux_repas($Mon_mail); // USE ID
+				$id=F3::get('SESSION.id'); // USE ID
+				$flux=Repas::instance()->flux_repas($id); // USE ID
 				if($flux) {
 					for($xx=0;$xx<count($flux);$xx++) {
 						$mail=$flux[$xx]['log_invit'];
@@ -98,8 +100,8 @@ class App_controller{
 				}
 			break;
 			case 'POST':
-				$Mon_mail=F3::get('SESSION.mail'); // USE ID
-				$flux=Repas::instance()->flux_repas($Mon_mail); // USE ID
+				$id=F3::get('SESSION.id'); // USE ID
+				$flux=Repas::instance()->flux_repas($id); // USE ID
 				if($flux) {
 					for($xx=0;$xx<count($flux);$xx++) {
 						$mail=$flux[$xx]['log_invit'];
