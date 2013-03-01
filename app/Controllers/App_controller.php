@@ -87,10 +87,11 @@ class App_controller{
 				$id=F3::get('SESSION.id'); // USE ID
 				$flux=Repas::instance()->flux_repas($id); // USE ID
 				if($flux) {
-					for($xx=0;$xx<count($flux);$xx++) {
-						$mail=$flux[$xx]['log_invit'];
-						$infos[$xx]=App::instance()->get_inscrit($mail);
+					foreach($flux as $i => $fluxx)
+					{
+						$infos[$i]=App::instance()->get_inscrit($fluxx->log_invit);
 					}
+					
 					F3::set('flux',$flux);
 					F3::set('infos',$infos);
 					echo Views::instance()->render('Dashboard.html');
@@ -100,20 +101,7 @@ class App_controller{
 				}
 			break;
 			case 'POST':
-				$id=F3::get('SESSION.id'); // USE ID
-				$flux=Repas::instance()->flux_repas($id); // USE ID
-				if($flux) {
-					for($xx=0;$xx<count($flux);$xx++) {
-						$mail=$flux[$xx]['log_invit'];
-						$infos[$xx]=App::instance()->get_inscrit($mail);
-					}
-					F3::set('flux',$flux);
-					F3::set('infos',$infos);
 					echo Views::instance()->render('Dashboard.html');
-				}
-				else {
-					echo Views::instance()->render('Dashboard.html');
-				}
 			break;
 		}  
 	}
