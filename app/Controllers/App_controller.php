@@ -16,7 +16,7 @@ class App_controller{
 	/* Direction vers la homepage */
 	
 	function home() {
-		echo Views::instance()->render('travelr.html');
+		echo Views::instance()->render('home.html');
 	}
 	
 	/* Connexion */
