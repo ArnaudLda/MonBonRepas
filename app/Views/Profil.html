@@ -23,48 +23,75 @@
 	
 </head>
 <body>
-  <header>
-    <nav>
-    <a href="./"><span>Travel'r</span> BORNEO</a>
-    <ul class="main">
-        <li><a href="./"</a>Home</li>
-        <li><a href="connexion">Connexion</a></li>
-    </ul>
-    
-    <ul class="social">
-        <li><a href="">Follow us on Twitter</a></li> 
-        <li><a href="">LinkedIn</a></li>
-        <li><a href="">Viméo</a></li>
-        <li><a href="">Pinterest</a></li>
-    </ul>
-    </nav>
-  </header>
-  <section>
-    
-	<form method="POST" action="Profil_info">
-		<img src="<?php $avatar ?>" alt="Avatar" >
-		<input type="file" >
+
+  <img class="logo" src="public/images/logo.png" alt="MonBonRepas">
+  <div class="content">
+  						<!-- /////////////////////// NAVIGATION /////////////////////// -->
+		<nav>
+			<a href="#">
+				<div class="profil">
+					
+					<div style="position:relative; height:86px;">
+						<div class="circular">
+						</div>
+					</div>
+						
+					
+					     <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
+				</div>
+			</a>
+			<hr style="position:relative; top:25px;" /> 
+			<a href="#">
+						<div class="gerer"></div>
+					    <p style="text-align:center">Gérer les repas</p>
+			</a>
+			<hr style="position:relative; top:10px;" /> 
+			<a href="#">
+						<div class="organiser"></div>
+					    <p style="text-align:center; font-size:14px;">Organiser un repas</p>
+			</a>
+		</nav>
+   						<!-- /////////////////////// NAVIGATION /////////////////////// -->
+
+   		<!-- /////////////////////// MODIF PROFIL /////////////////////// -->
+		<div class="corps">
+   
+	<form method="POST" action="Profil_info"  enctype="multipart/form-data">			<!-- MODIF -->
+		<img style="position:absolute;float:left" height="250px" width="200px" src="<?php echo $profil->avatar; ?>" alt="Avatar" >
+	<div class="name">
+		<input name="MAX_FILE_SIZE" type="hidden" value="200000" >
+		<input type="file" name="avatar">
 		<label>Nom : <input name="nom" type="text" value="<?php echo $profil->nom; ?>" ></label>
 		<label>Prenom : <input name="prenom" type="text" value="<?php echo $profil->prenom; ?>" ></label>
-		<label>Mail : <input name="mail" type="mail" value="<?php echo $profil->mail; ?>" ></label>
-		
-		<div>DA GOOGLE MAP MOFO</div>
+		<label>Mail : <input name="mail" type="email" value="<?php echo $profil->mail; ?>" ></label>		
+		<!-- <h2>DA GOOGLE MAP MOFO</h2>
 		<input name="lat" type="hidden" value="<?php echo $profil->lat; ?>" >
-		<input name="lng" type="hidden" value="<?php echo $profil->lng; ?>" >
-		<input type="submit" value="Valider">
+		<input name="lng" type="hidden" value="<?php echo $profil->lng; ?>" > -->
+		<input class="button" type="submit" value="Mofifier">
 		<p><?php echo $errorInfo;?></p>
+	</div>
 	</form>
-	
+	<hr>
 	<form method="POST" action="Profil_pswd">
 		<label>Ancien pass : <input name="old_pswd" type="password"></label>
 		<label>Nouveau pass : <input name="new_pswd" type="password"></label>
 		<label>Retaper nouveau pass : <input name="new_pswd_bis" type="password"></label>
-		<input type="submit" value="Valider">
+		<input class="button" type="submit" value="Modifier">
 		<p><?php echo $errorPswd;?></p>
 	</form>
-	
-	<form method="POST" action="Profil_gout">
-		Ce que vous n'aimez PAS :
+	<hr>
+
+ 		</div>
+ 	<!-- /////////////////////// MODIF PROFIL /////////////////////// -->
+
+
+ 	<!-- /////////////////////// BLOC ORANGE GOUT /////////////////////// -->
+ 		<span class="com" >
+ 			
+			<span id="arrow"></span>
+
+			<form method="POST" action="Profil_gout">
+		<h2 style="color:#fbf0ef;">Ce que je n'aime pas :(</h2>
 			<h3>Viandes : </h3>
 			<?php $i = 0;
 				  foreach($aliments as $item) :?>
@@ -73,7 +100,7 @@
 				<?php $i++;
 					  endif;?>
 			<?php endforeach;?>
-			
+			<hr style="opacity:0.2">
 			<h3>Légumes : </h3>
 			<?php $i = 0;
 				  foreach($aliments as $item) :?>
@@ -82,25 +109,45 @@
 				<?php $i++;
 					  endif;?>
 			<?php endforeach;?>
-			
+			<h3>Poissons : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Poissons") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['2_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Accompagnements : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Accompagnements") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['3_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Desserts : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Desserts") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['4_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Fromage : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Fromage") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['5_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
 			<input type="submit" value="Valider">
 			<p><?php echo $errorGout;?></p>
-		</form>
-		
-    
-  </section>
-  <footer>
-    <a href="we-live-blue/">We think blue</a>
-  </footer>
-  <span class="trama"></span>
-  <script>
-  var datas=<?php echo F3::raw($pictures) ?>;
-  var coords=<?php echo F3::raw($coords) ?>;
-  </script>
-  
+			<hr style="opacity:0.2">
+
+		</span>
+ 		<!-- /////////////////////// BLOC ORANGE GOUT /////////////////////// -->
+  </div>
+
 </body>
 </html>
-
-
-
-

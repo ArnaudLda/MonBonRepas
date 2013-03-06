@@ -10,7 +10,7 @@ class Repas extends Prefab{
 	
 	/* Création de repas */
 	
-	function crea_repas($mail,$lat,$lng,$position,$my_id, $date,$is_inscrit) {
+	function crea_repas($mail,$lat,$lng,$position,$my_id, $date,$is_inscrit,$titre) {
 		$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 		$id_repas = rand(0,1000);
 		$has_id = $repas->load(array('id_repas',$id_repas));
@@ -22,8 +22,6 @@ class Repas extends Prefab{
 				$ok=true;
 			}
 		}
-		
-		
 		
 		foreach ($mail as $i => $invit) {
 			if ($invit) {
@@ -53,10 +51,25 @@ class Repas extends Prefab{
 				$repas->date=$date;
 				$repas->Lib_lieu=$position;
 				$repas->id_repas=$id_repas;
+				$repas->titre=$titre;
 				$repas->is_inscrit=$is_inscrit[$i];
 				$repas->save();
 			}
 		}
+	}
+	
+	/* Suppression d'une invitation */
+	
+	function supp_invit($id_repas, $id_invit){
+		$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
+		$repas->load(array('id_repas=? AND log_invit=?',$id_repas, $id_invit));
+		$repas->erase();
+	}
+	
+	/* Modif repas */
+	
+	function modif_repas($lat, $lng, $Lib_lieu, $date, $id_repas){
+		return F3::get('dB')->exec("UPDATE repas SET lat='$lat', lng='$lng', Lib_lieu='$Lib_lieu', date='$date' WHERE id_repas='$id_repas'");
 	}
 	
 	/* Récupération de l'id par rapport au mail */
@@ -80,6 +93,12 @@ class Repas extends Prefab{
 	function get_liste_repas($id) {
 		$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 		return $repas->find(array('log_invit=?',$id));
+	}
+	
+	/* Récupération de la liste des repas dont nous sommes le créateur*/ // NEW REQUETE
+
+	function get_liste_repas_crea($id) {
+		return F3::get('dB')->exec("SELECT DISTINCT id_repas, titre, date FROM repas WHERE log_crea='$id'");
 	}
 	
 	/* Récupération d'un repas */
@@ -106,10 +125,6 @@ class Repas extends Prefab{
 	
 	function modif_statut_repas($reponse,$id) {
 		return F3::get('dB')->exec("UPDATE repas SET statut='$reponse' WHERE id='$id'");
-		/*$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
-		$repas->load(array('id=?',$id));
-		$repas->statut = $reponse;
-		return $repas->update();*/
 	}
 	
 	/* Récupération du flux de repas */
@@ -118,6 +133,15 @@ class Repas extends Prefab{
 		$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
 		$statut='non_lu';
 		return $repas->find(array('log_crea=? and statut!=?',$id,$statut));
+	}
+	
+	/* Transforme mail en id à l'inscription */
+	
+	function signup_id($info){
+		$mail = $info->mail;
+		$id = $info->id;
+		$inscrit = 1;
+		F3::get('dB')->exec("UPDATE repas SET log_invit='$id', is_inscrit='$inscrit' WHERE log_invit='$mail'");
 	}
 	
 	function __destruct(){

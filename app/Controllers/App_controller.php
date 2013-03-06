@@ -62,15 +62,15 @@ class App_controller{
 					echo Views::instance()->render('inscription.html');
 					return;
 				}
-				$test=App::instance()->create($_POST['mail']);
-				if($test) {
+				$result=App::instance()->create($_POST['mail'], $_POST['prenom'],$_POST['nom'],$_POST['passwd']);
+				if(!$result) {
 					$error="error";
 					F3::set('errorMsg["mail"]',$error);
 					echo Views::instance()->render('inscription.html');
 					return;
 				}
 				else {
-					// modifier la table repas ici
+					Repas::instance()->signup_id($result);
 					F3::reroute('/connexion');
 				}
 			break;

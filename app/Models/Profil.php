@@ -11,32 +11,30 @@ class Profil extends Prefab{
 	function modif_gout($session_id) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 
-		$session_id = 1; // test
-
 		$serial = serialize(F3::get('POST'));
 		F3::get('dB')->exec("UPDATE inscrit SET gout='$serial' WHERE id='$session_id' ");
 
 		return $inscrit->load(array('id=?',$session_id));
 	}
 	
-	function modif_info($session_id, $nom, $prenom, $mail) {
+	function modif_info($session_id, $nom, $prenom, $mail, $img) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-
-		$session_id = 1; // test
-		
-		F3::get('dB')->exec("UPDATE inscrit SET nom='$nom', prenom='$prenom', mail='$mail' WHERE id='$session_id'");
-		
-		return $inscrit->load(array('id=?',$session_id));
+		if($inscrit->find(array('mail=?',$mail))) {
+			return false;
+		}
+		else {
+			F3::get('dB')->exec("UPDATE inscrit SET nom='$nom', prenom='$prenom', mail='$mail' WHERE id='$session_id'");
+			return $inscrit->load(array('id=?',$session_id));
+		}
 	}
 	
 	function modif_pswd($session_id, $old_pswd, $new_pswd, $new_pswd_bis) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 
-		$session_id = 1; // test
-
 		$in_db = $inscrit->load(array('id=?', $session_id));
 
-		if($old_pswd == $in_db->passwd && $new_pswd == $new_pswd_bis) {
+		if(md5($old_pswd) == $in_db->passwd && $new_pswd == $new_pswd_bis) {
+			$new_pswd=md5($new_pswd);
 			F3::get('dB')->exec("UPDATE inscrit SET passwd='$new_pswd' WHERE id='$session_id' ");
 		}
 
@@ -45,7 +43,6 @@ class Profil extends Prefab{
 	
 	function get_profil($session_id) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		$session_id = 1; // test
 
 		return $inscrit->load(array('id=?',$session_id));
 	}
@@ -58,7 +55,6 @@ class Profil extends Prefab{
 	
 	function get_contact($session_id) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		$session_id = 1; // test
 		
 		$infos = $inscrit->load(array('id=?',$session_id));
 		$contact = $infos->contact;
@@ -68,7 +64,6 @@ class Profil extends Prefab{
 	
 	function modif_contact($session_id) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		$session_id = 1; // test
 		
 		$posted = F3::get('POST');
 		

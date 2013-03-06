@@ -10,14 +10,18 @@ class App extends Prefab{
 	
 	/* Création de compte */
 	
-	function create($mail) {
+	function create($mail,$prenom,$nom,$pwd) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 		if($inscrit->find(array('mail=?',$mail))) {
-			return true;
+			return false;
 		}
 		else {
-			$inscrit->copyFrom('POST');
+			$inscrit->prenom=$prenom;
+			$inscrit->nom=$nom;
+			$inscrit->mail=$mail;
+			$inscrit->passwd=md5($pwd);
 			$inscrit->save();
+			return $inscrit->load(array('mail=?',$mail));
 		}
 	}
 	
@@ -25,7 +29,7 @@ class App extends Prefab{
   
 	function connect($mail, $passwd) {
 		$connect=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		return $connect->load(array('mail=? and passwd=?',$mail,$passwd));
+		return $connect->load(array('mail=? and passwd=?',$mail,md5($passwd)));
 	}
 	
 	/* Récupération */

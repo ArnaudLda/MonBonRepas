@@ -6,6 +6,8 @@ class Profil_controller{
 	}
 	
 	function profil() {
+		if(!F3::get('SESSION.id'))
+			F3::reroute('/');
 		switch(F3::get('VERB')) { // faire sauter le switch
 			case 'GET':
 				$session_id=F3::get('SESSION.id');
@@ -47,6 +49,37 @@ class Profil_controller{
 					F3::reroute('/Profil');
 					return;
 				}
+				/*if(isset($_FILES['avatar']))// MODIF AVATAR QUI NE MARCHE PAS 
+				{
+					$rep='uploads/avatars/';
+					$fichier=basename($_FILES['avatar']['name']);
+					$taille_max=200000;
+					$taille_origin=filesize($_FILES['avatar']['tmp_name']);
+					$ext=array('.png','.jpg','.jpeg');
+					$ext_origin=strchr($_FILES['avatar']['name'],'.');
+					
+					if(!in_array($ext_origin, $ext))
+					{
+						$erreur='Mauvais format';
+					}
+					if($taille_origin>$taille_max)
+					{
+						$erreur='Mauvaise taille';
+					}
+					if(!isset($erreur))
+					{
+						if(move_uploaded_file($_FILES['avatar']['tmp_name'],$rep . $fichier))
+						{
+							$img=$rep . $fichier;
+						}
+						else
+							echo'FAIL';
+					}
+					if(isset($erreur))
+					{
+						echo $erreur;
+					}
+				}*/
 				$session_id=F3::get('SESSION.id');
 				$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail']);
 				if (!$profil) {

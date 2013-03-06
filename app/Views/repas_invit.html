@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
@@ -41,84 +41,39 @@
     </ul>
     </nav>
   </header>
-  <section>
-    
-    <div class="main collapse">
-      <h1>GEREZ VOTRE REPAS</h1>
-	  <section >
-	  <h2>Nouvelles invitations</h2>
-	  <h2>Invitations acceptées :</h2>
-	  <?php foreach($repas as $invits): ?>
-		<?php 
-			$id=$invits->id_repas;
-			$statut=$invits->statut;
-			if($statut=="accepter") 
-			{?>
-		 <p><a href="repas?action=<?php echo $id; ?>">
-		 <?php 
-			foreach($contact as $contacts)
-				{
-					if(($contacts->id)==($invits->log_crea)) // ID
-					{
-						echo $invits->titre.' reçu le '.$invits->date;
-					}
-				}
-		?></a></p>
-		  <?php }?>
-	 <?php endforeach; ?>
-	 <h2>Invitations refusées :</h2>
-	 <?php foreach($repas as $invits): ?>
-		  <?php 
-			$id=$invits->id_repas; 
-			$statut=$invits->statut;
-			if($statut=="refuser") 
-			{?>
-			<p><a href="repas?action=<?php echo $id; ?>">
-			<?php 
-				foreach($contact as $contacts)
-				{
-					if(($contacts->id)==($invits->log_crea)) // ID
-					{
-						echo $invits->titre.' reçu le '.$invits->date;
-					}
-				}
-			?></a></p>
-			<?php }?>
-	 <?php endforeach; ?>
-	 <h2>Invitations non lues :</h2>
-	  <?php foreach($repas as $invits): ?>
-		<?php	
-			$id=$invits->id_repas; 
-			$statut=$invits->statut;
-			if($statut=="non_lu") 
-			{?>
-		 <p><a href="repas?action=<?php echo $id; ?>">
-		 <?php 
-			foreach($contact as $contacts)
-				{
-					if(($contacts->id)==($invits->log_crea)) // ID
-					{
-						echo $invits->titre.' reçu le '.$invits->date;
-					}
-				}
-		 ?></a></p>
-		  <?php }?>
-      <?php endforeach; ?>
-	  <h1>GEREZ VOS REPAS</h1>                         <!-- NOUVEAU -->
-	  <h2>Vos repas</h2>
-	  <?php foreach($crea_repas as $crea): ?>
-		<p><a href="repas?action=<?php echo $crea['id_repas']; ?>">
-		<?php 
-			echo $crea['titre'].' créé le '.$crea['date']; 
-		?></a></p>
-	 <?php endforeach; ?>
-	</section>
+   <section id="com_repas">
+    <div id="coms">
+		
+	</div>
+	<div>
+		<form method="post" action="commentaire" enctype="multipart/form-data" id="commentaire">
+			<input type="text" name="commentaires" placeholder="commentaire" id="commentaires"/>
+			<input type="hidden" name="id_mess" value="<?php echo $repas->id_repas; ?>" id="id_mess"/>
+			<?php if($errorMsg['commentaires']){echo 'value="error"';} ?>
+			<input type="submit" value="Envoyer" />
+	    </form >
 	</div>
   </section>
+  <section>
+	
+    <div class="main collapse">
+      <h1>Message</h1><br/>
+	  <h2>Invitation de <?php echo $crea->nom; echo " ".$crea->prenom; ?></h2><br/>
+	  <h2>Son adresse mail est <?php echo $crea->mail; ?></h2><br/>
+	  <h2>Le repas aura lieu à <?php echo $repas->Lib_lieu; ?></h2><br/>
+	   <fieldset class="geocoder">
+				<div id="lieu_repas"></div>
+				<input type="hidden" name="lat" value="<?php echo $repas->lat; ?>" id="lat"/>
+				<input type="hidden" name="lng" value="<?php echo $repas->lng; ?>" id="lng"/>
+		</fieldset>
+	  <a href="change_statut?action=<?php echo $repas->id_repas; ?>&rep=accepter">ACCEPTER</a><br/><a href="change_statut?action=<?php echo $repas->id_repas; ?>&rep=refuser">REFUSER</a>
+  </section>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-texte="Venez vous aussi voir mon repas" data-related="Mon bon repas:Le meilleure repas de votre vie" data-lang="en" data-size="large" data-count="horizontal">Tweet</a>
   <footer>
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   
 </body>
 </html>

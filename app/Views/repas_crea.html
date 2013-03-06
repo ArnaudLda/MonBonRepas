@@ -1,0 +1,132 @@
+﻿<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="public/css/supersized.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="public/css/travelr.css" type="text/css" media="screen"  />
+  <link href='http://fonts.googleapis.com/css?family=Strait' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="public/js/lib/modernizr-2.5.3.min.js"></script>
+	<script type="text/javascript" src="public/js/lib/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="public/js/lib/supersized.3.2.7.js"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="public/js/travelr.js"></script>
+	
+</head>
+<body>
+  <header>
+    <nav>
+    <a href="./"><span>Travel'r</span> BORNEO</a>
+    <ul class="main">
+        <li><a href="./"</a>Home</li>
+        <li><a href="connexion">Connexion</a></li>
+		<li><a href="dashboard">dashboard</a></li>
+    </ul>
+    
+    <ul class="social">
+        <li><a href="">Follow us on Twitter</a></li> 
+        <li><a href="">LinkedIn</a></li>
+        <li><a href="">Viméo</a></li>
+        <li><a href="">Pinterest</a></li>
+		<li><a href="logout">Déconnecter</a></li>
+    </ul>
+    </nav>
+  </header>
+   <section id="com_repas">
+    <div id="coms">
+		
+	</div>
+	<div>
+		<form method="post" action="commentaire" enctype="multipart/form-data" id="commentaire">
+			<input type="text" name="commentaires" placeholder="commentaire" id="commentaires"/>
+			<input type="hidden" name="id_mess" value="<?php echo $repas->id_repas; ?>" id="id_mess"/>
+			<?php if($errorMsg['commentaires']){echo 'value="error"';} ?>
+			<input type="submit" value="Envoyer" />
+	    </form >
+	</div>
+  </section>
+  <section>
+    
+	Ce que vos invités n'aiment PAS :
+			<h3>Viandes : </h3>
+			<ul>
+				<?php $i = 0; // CORRECTIF APPLIQUE ICI
+					  foreach($aliments as $item) :?>
+					<?php if($item->categorie == "Viande") : ?>
+						<?php if ($gout['0_'.$i] == 'on') : ?>
+							<li><?php echo $item->aliment; ?></li>
+						<?php endif;
+						$i++;
+					endif;?>
+				<?php endforeach;?>
+			</ul>
+			
+			<h3>Légumes : </h3>
+			<ul>
+				<?php $i = 0; // CORRECTIF APPLIQUE ICI
+					  foreach($aliments as $item) :?>
+					<?php if($item->categorie == "Légume") : ?>
+						<?php if ($gout['1_'.$i] == 'on') : ?>
+							<li><?php echo $item->aliment; ?></li>
+						<?php endif;
+						$i++;
+					endif;?>
+				<?php endforeach;?>
+			</ul>
+	
+    <div class="main collapse">
+      <h1>Message</h1><br/>
+	  <form action="" method="post">
+		  <label>Le repas aura lieu à <input type="text" name="Lib_lieu" value="<?php echo $invit_list[0]->Lib_lieu; ?>"></label><br/>
+		  <fieldset class="geocoder">
+				<div id="lieu_repas"></div>
+				<input type="hidden" name="lat" value="<?php echo $invit_list->lat; ?>" id="lat"/>
+				<input type="hidden" name="lng" value="<?php echo $invit_list->lng; ?>" id="lng"/>
+		</fieldset>
+		  <label>Il aura lieu le <input type="text" name="date" value="<?php echo $invit_list[0]->date; ?>"></label>
+		  <input type="hidden" name="id_repas" value="<?php echo $invit_list[0]->id_repas;?>">
+		  <input type="submit" value="Modifier les informations" >
+	  </form>
+	  <h2>Liste des invités</h2>
+	  <?php foreach ($invit_list as $i => $invit ) : ?>
+		<p><?php 
+		if($invit->is_inscrit) {
+			echo $invit_infos[$i]->nom ." ". $invit_infos[$i]->prenom; 
+		}
+		else {
+			echo $invit->log_invit;
+		}
+		
+		if($invit->statut == "accepter") {
+			echo " a accepté votre invitation.";
+		}
+		else if($invit->statut == "refuser") {
+			echo " a refusé votre invitation.";
+		}
+		else {
+			echo " n'a pas encore répondu à votre invitaion.";
+		}
+		?></p>
+		<a href="supp_invit?id_repas=<?php echo $invit_list[0]->id_repas;?>&id_invit=<?php echo $invit->log_invit;?>">Supprimer l'invitation</a>
+	  <?php endforeach; ?>
+	  
+	  <a href="supp_repas?id_repas=<?php echo $invit_list[0]->id_repas;?>">Supprimer le repas</a>
+	</section>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-texte="Venez vous aussi voir mon repas" data-related="Mon bon repas:Le meilleure repas de votre vie" data-lang="en" data-size="large" data-count="horizontal">Tweet</a>
+  <footer>
+    <a href="we-live-blue/">We think blue</a>
+  </footer>
+  <span class="trama"></span>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+</body>
+</html>
