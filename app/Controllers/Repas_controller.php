@@ -136,10 +136,13 @@ class Repas_controller{
 				}
 				if ($im_creator) {
 					$invit_gouts = array();
-					
+					$invit_infos = array();
 					foreach ($invit_list as $i => $item) {
 						if($item->is_inscrit) {
-							$invit_gouts[$i] = Repas::instance()->get_invit_gout($item->log_invit);
+							$invit_infos[$i] = App::instance()->get_inscrit($item->log_invit);
+							if ($item->statut == "accepter") {
+								$invit_gouts[$i] = Repas::instance()->get_invit_gout($item->log_invit);
+							}
 						}
 					}
 					$invit_gouts = array_values($invit_gouts);
@@ -151,7 +154,7 @@ class Repas_controller{
 						}
 					}
 					
-					F3::set('invit_list', $liste_invites);
+					F3::set('invit_list', $invit_list);
 					F3::set('invit_infos',$invit_infos);
 					F3::set('gout',$gouts_finaux);
 					$aliments=Profil::instance()->get_aliment();
