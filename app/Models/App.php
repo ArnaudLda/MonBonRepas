@@ -20,6 +20,7 @@ class App extends Prefab{
 			$inscrit->nom=$nom;
 			$inscrit->mail=$mail;
 			$inscrit->passwd=md5($pwd);
+			$inscrit->avatar='uploads/avatars/anon.jpg';
 			$inscrit->save();
 			return $inscrit->load(array('mail=?',$mail));
 		}
