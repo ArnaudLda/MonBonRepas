@@ -48,7 +48,7 @@
 	<div>
 		<form method="post" action="commentaire" enctype="multipart/form-data" id="commentaire">
 			<input type="text" name="commentaires" placeholder="commentaire" id="commentaires"/>
-			<input type="hidden" name="id_mess" value="<?php echo $repas->id; ?>" id="id_mess"/>
+			<input type="hidden" name="id_mess" value="<?php echo $repas->id_repas; ?>" id="id_mess"/>
 			<?php if($errorMsg['commentaires']){echo 'value="error"';} ?>
 			<input type="submit" value="Envoyer" />
 	    </form >
