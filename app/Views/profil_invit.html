@@ -1,0 +1,133 @@
+﻿<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+<link rel="stylesheet" href="public/css/style.css" type="text/css" media="screen"/>
+<script type="text/javascript" src="public/js/jquery.js"></script>
+	
+</head>
+<body>
+
+  <img class="logo" src="public/images/logo.png" alt="MonBonRepas">
+  <div class="content">
+  						<!-- /////////////////////// NAVIGATION /////////////////////// -->
+		<nav>
+			<a href="#">
+				<div class="profil">
+					
+					<div style="position:relative; height:86px;">
+						<div class="circular">
+						</div>
+					</div>
+						
+					
+					     <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
+				</div>
+			</a>
+			<hr style="position:relative; top:25px;" /> 
+			<a href="#">
+						<div class="gerer"></div>
+					    <p style="text-align:center">Gérer les repas</p>
+			</a>
+			<hr style="position:relative; top:10px;" /> 
+			<a href="#">
+						<div class="organiser"></div>
+					    <p style="text-align:center; font-size:14px;">Organiser un repas</p>
+			</a>
+		</nav>
+   						<!-- /////////////////////// NAVIGATION /////////////////////// -->
+
+   		<!-- /////////////////////// MODIF PROFIL /////////////////////// -->
+		<div class="corps">
+   
+	<form method="POST" action="Profil_info"  enctype="multipart/form-data">			<!-- MODIF -->
+		<img style="position:absolute;float:left" height="250px" width="200px" src="<?php echo $profil->avatar; ?>" alt="Avatar" >
+	<div class="name">
+		<label>Nom : <input name="nom" type="text" value="<?php echo $profil->nom; ?>" ></label>
+		<label>Prenom : <input name="prenom" type="text" value="<?php echo $profil->prenom; ?>" ></label>
+		<label>Mail : <input name="mail" type="email" value="<?php echo $profil->mail; ?>" ></label>	
+		<p><?php echo $errorInfo;?></p>
+	</div>
+	</form>
+	<hr>
+
+ 		</div>
+ 	<!-- /////////////////////// MODIF PROFIL /////////////////////// -->
+
+
+ 	<!-- /////////////////////// BLOC ORANGE GOUT /////////////////////// -->
+ 		<span class="com" >
+ 			
+			<span id="arrow"></span>
+
+			<form method="POST" action="Profil_gout">
+		<h2 style="color:#fbf0ef;">Ce que je n'aime pas :(</h2>
+			<h3>Viandes : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Viande") :?>
+					<label><input type="checkbox" name="0_<?php echo $i; ?>" <?php if ($gout['0_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<hr style="opacity:0.2">
+			<h3>Légumes : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Légume") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['1_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Poissons : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Poissons") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['2_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Accompagnements : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Accompagnements") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['3_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Desserts : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Desserts") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['4_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<h3>Fromage : </h3>
+			<?php $i = 0;
+				  foreach($aliments as $item) :?>
+				<?php if($item->categorie == "Fromage") :?>
+					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['5_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
+				<?php $i++;
+					  endif;?>
+			<?php endforeach;?>
+			<p><?php echo $errorGout;?></p>
+			<hr style="opacity:0.2">
+
+		</span>
+ 		<!-- /////////////////////// BLOC ORANGE GOUT /////////////////////// -->
+  </div>
+
+</body>
+</html>
+
+
+
+

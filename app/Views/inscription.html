@@ -1,65 +1,80 @@
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!DOCTYPE>
+<html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Mon Bon Repas</title>
 
-	<title></title>
-	<meta name="description" content="">
+<link rel="stylesheet" href="public/css/parallax.css" type="text/css" media="screen"/>
+<script type="text/javascript" src="public/js/jquery.js"></script>
+<script type="text/javascript" src="public/js/jquery.jparallax.js"></script>
 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" href="public/css/supersized.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="public/css/travelr.css" type="text/css" media="screen"  />
-  <link href='http://fonts.googleapis.com/css?family=Strait' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="public/js/lib/modernizr-2.5.3.min.js"></script>
-	<script type="text/javascript" src="public/js/lib/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="public/js/lib/supersized.3.2.7.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  <script type="text/javascript" src="public/js/travelr.js"></script>
-	
+
+<style type="text/css" media="screen">
+    
+</style>
+<script type="text/javascript">
+$(document).ready(function () {  
+       $('#parallax').jparallax();
+});  
+</script>
+
 </head>
+
 <body>
-  <header>
-    <nav>
-    <a href="./"><span>Travel'r</span> BORNEO</a>
-    <ul class="main">
-        <li><a href="./"</a>Home</li>
-    </ul>
-    
-    <ul class="social">
-        <li><a href="">Follow us on Twitter</a></li> 
-        <li><a href="">LinkedIn</a></li>
-        <li><a href="">Viméo</a></li>
-        <li><a href="">Pinterest</a></li>
-    </ul>
-    </nav>
-  </header>
-  <section>
-    
-    <div class="main collapse">
-      <h1>INSCRIPTION</h1>
-	  <form method="post" action="" enctype="multipart/form-data">
-			<label for="prenom">Votre Prénom</label> : <input type="text" name="prenom" id="prenom" placeholder="Prénom" autocomplete="off" /><?php if($errorMsg['prenom']){echo 'value="error"';} ?> <br/>
-			<label for="nom">Votre nom</label> : <input type="text" name="nom" id="nom" placeholder="Nom" autocomplete="off"/><?php if($errorMsg['nom']){echo 'value="error"';} ?><br/>
-			<label for="mail">Votre mail</label> : <input type="text" name="mail" id="mail" placeholder="Adresse e-mail" autocomplete="off"/><?php if($errorMsg['mail']){echo 'value="error"';} ?><br/>
-			<label for="passwd">Votre passwd</label> : <input type="password" name="passwd" id="passwd" placeholder="Mot de passe" autocomplete="off"/><?php if($errorMsg['passwd']){echo 'value="error"';} ?><br/>
-			<input type="submit" value="Envoyer" />
-	  </form >
-  </section>
-  <footer>
-    <a href="we-live-blue/">We think blue</a>
-  </footer>
-  <script type="text/javascript">
-		
-  </script>
-  
+
+	<div class="conteneur" style="width:1000px">
+	
+		<div id="parallax" style="position:relative;width:1000px;height:650;">
+			    		
+
+            <p style="text-align:center; width:970px;height:470px;"><img src="public/images/fourchette2.png"/></p>
+            <p style="text-align:center; width:980px;height:600px;padding-left:190px;"><img src="public/images/banane.png"/></p>
+            <p style="text-align:center; width:570px;height:470px;padding-left:160px;"><img src="public/images/couteau.png"/></p>
+            <p style="width:900px;height:600px;padding-top:200px; padding-left:600px;"><img src="public/images/carrotte.png"/></p>
+            <p style="width:900px;height:600px;padding-right:100px; padding-top:0px;"><img src="public/images/assiette2.png"/></p>
+            <p style="width:800px;height:550px;padding-top:0px;"><img src="public/images/legume3.png"/></p>
+            <p style="width:900px;height:470px;padding-top:50px;"><img src="public/images/legume2.png"/></p>
+            <p style="text-align:center; width:780px;height:465px;padding-left:300px;"><img src="public/images/cuilliere.png"/></p>
+            <p style="width:780px;height:465px;padding-top:0px;"><img src="public/images/fourchette.png"/></p>
+            <p style="text-align:center;width:1000px;height:650px;padding-top:110px"><img src="public/images/assiette1.png"/></p>
+            
+        </div>
+           
+    </div>
+    <div style="position:relative;margin:auto; width:700px;top:-50px;color:#ff591e;">
+        <img style="position:relative; top:40px;padding:10px;" src="public/images/quote1.png" alt=""> INVITER, CRÉER ET ORGANISER UN REPAS EST DEVENU SI SIMPLE...  <img src="public/images/quote2.png" alt=""> 
+    </div>
+
+    <div id="login" style="position:relative;">
+
+        <h1>Inscrivez-vous ! :)</h1>
+
+        <form method="post" action="" enctype="multipart/form-data">
+
+            <fieldset>
+
+                <p><input type="text" name="prenom" id="prenom" placeholder="Prénom" autocomplete="off" required /><?php if($errorMsg['prenom']){echo 'value="error"';} ?></p> 
+
+                <p><input type="text" name="nom" id="nom" placeholder="Nom" required autocomplete="off"/><?php if($errorMsg['nom']){echo 'value="error"';} ?> </p>
+                <p><input type="email" name="mail" id="mail" placeholder="Adresse e-mail" required autocomplete="off"/><?php if($errorMsg['mail']){echo 'value="error"';} ?> </p>
+                <p><input type="password" name="passwd" id="passwd" placeholder="Mot de passe" required autocomplete="off"/><?php if($errorMsg['passwd']){echo 'value="error"';} ?><?php if($errorMsg['mail']){echo 'value="error"';} ?> </p>
+
+                <p><a href="#">Mot de passe oublié ?</a></p>
+
+                <p><input type="submit" value="Login"></p>
+
+            </fieldset>
+
+        </form>
+
+        <p><span class="btn-round">ou</span></p>
+
+        <p>
+
+            <a class="facebook-before"><span class="fontawesome-facebook"></span></a>
+            <button class="facebook">Connexion avec Facebook</button>
+
+        </p>
+    </div> <!-- end login -->
 </body>
 </html>
-
-
-
-

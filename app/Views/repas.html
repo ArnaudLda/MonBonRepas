@@ -79,6 +79,14 @@
       <h1>Message</h1><br/>
 	  <h2>Invitation de <?php echo $crea->nom; echo " ".$crea->prenom; ?></h2><br/>
 	  <h2>Son adresse mail est <?php echo $crea->mail; ?></h2><br/>
+	  <h2>Listes des invités à ce repas : </h2><br/>
+	  <?php foreach ($invit_list as $invits): ?> 												<!--  MODIFS ICI  -->
+		<p><a href="profil_invit?action=<?php echo $invits->id; ?>">
+			<?php 
+				echo $invits->nom.'  '.$invits->prenom; 
+			?>
+		</a></p>
+	  <?php endforeach; ?>																	    <!--  FIN MODIFS  -->
 	  <h2>Le repas aura lieu à <?php echo $repas->Lib_lieu; ?></h2><br/>
 	   <fieldset class="geocoder">
 				<div id="lieu_repas"></div>
@@ -87,12 +95,13 @@
 		</fieldset>
 	  <a href="change_statut?action=<?php echo $repas->id; ?>&rep=accepter">ACCEPTER</a><br/><a href="change_statut?action=<?php echo $repas->id; ?>&rep=refuser">REFUSER</a>
   </section>
+  <!-- // TWITTER -->
+  <a href="https://twitter.com/share" class="twitter-share-button" data-texte="Venez vous aussi voir mon repas" data-related="Mon bon repas:Le meilleure repas de votre vie" data-lang="en" data-size="large" data-count="horizontal">Tweet</a>
   <footer>
     <a href="we-live-blue/">We think blue</a>
   </footer>
   <span class="trama"></span>
-  <script>
-  </script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   
 </body>
 </html>
