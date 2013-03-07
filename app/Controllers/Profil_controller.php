@@ -162,10 +162,8 @@ class Profil_controller{
 	}
 	
 	function contact() {
-			switch(F3::get('VERB')) {
-				case 'GET':
-					F3::reroute('/Profil');
-				break;
+			if(!F3::get('SESSION.id'))
+			F3::reroute('/');
 			switch(F3::get('VERB')) {
 				case 'GET':
 					$session_id=F3::get('SESSION.id');
@@ -183,7 +181,7 @@ class Profil_controller{
 				break;
 			}
 		}
-	}
+	
 	function __destruct(){
 
 	} 
