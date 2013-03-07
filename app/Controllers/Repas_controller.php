@@ -116,6 +116,7 @@ class Repas_controller{
 		switch(F3::get('VERB')) {
 			case 'GET':
 				$id=$_GET["action"];
+				$My_id=F3::get('SESSION.id');
 				$invit_list=Repas::instance()->get_full_repas($id);
 				$my_id=F3::get('SESSION.id');
 				$im_creator = false;
@@ -128,15 +129,17 @@ class Repas_controller{
 						$im_creator = true;
 					}
 				}
+				$invites=Repas::instance()->get_rep($id, $My_id);	// MODIF 
+				foreach ($invites as $i => $invits)			 
+				{
+					$liste_invites[$i]=App::instance()->get_inscrit($invits->log_invit);
+				}
 				if ($im_creator) {
 					$invit_gouts = array();
-					$invit_infos = array();
+					
 					foreach ($invit_list as $i => $item) {
 						if($item->is_inscrit) {
-							$invit_infos[$i] = App::instance()->get_inscrit($item->log_invit);
-							if ($item->statut == "accepter") {
-								$invit_gouts[$i] = Repas::instance()->get_invit_gout($item->log_invit);
-							}
+							$invit_gouts[$i] = Repas::instance()->get_invit_gout($item->log_invit);
 						}
 					}
 					$invit_gouts = array_values($invit_gouts);

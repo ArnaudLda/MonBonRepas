@@ -60,6 +60,14 @@
       <h1>Message</h1><br/>
 	  <h2>Invitation de <?php echo $crea->nom; echo " ".$crea->prenom; ?></h2><br/>
 	  <h2>Son adresse mail est <?php echo $crea->mail; ?></h2><br/>
+	  <h2>Listes des invités à ce repas : </h2><br/>
+	  <?php foreach ($invit_list as $invits): ?> 												<!--  MODIFS ICI  -->
+		<p><a href="profil_invit?action=<?php echo $invits->id; ?>">
+			<?php 
+				echo $invits->nom.'  '.$invits->prenom; 
+			?>
+		</a></p>
+	  <?php endforeach; ?>																	    <!--  FIN MODIFS  -->
 	  <h2>Le repas aura lieu à <?php echo $repas->Lib_lieu; ?></h2><br/>
 	   <fieldset class="geocoder">
 				<div id="lieu_repas"></div>

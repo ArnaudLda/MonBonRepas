@@ -113,6 +113,11 @@ class Repas extends Prefab{
 		return $repas->load(array('id=?',$id)); 
 	}
 	
+	function get_rep($id_repas, $my_id) { 
+		$repas=new DB\SQL\Mapper(F3::get('dB'),'repas');
+		return $repas->find(array('id_repas=? and log_invit!=?',$id_repas, $my_id)); 
+	}
+	
 	/* Récupération des gouts de chacun */
 	
 	function get_invit_gout($invit) {

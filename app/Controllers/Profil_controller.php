@@ -36,6 +36,37 @@ class Profil_controller{
 		}
 	}
 	
+	function profil_invit() {
+		if(!F3::get('SESSION.id'))
+			F3::reroute('/');
+		switch(F3::get('VERB')) { // faire sauter le switch
+			case 'GET':
+				$session_id=$_GET["action"];
+				$profil=Profil::instance()->get_profil($session_id);
+				F3::set('profil',$profil);
+				$gout = unserialize($profil->gout);
+				F3::set('gout',$gout);
+
+				$aliments=Profil::instance()->get_aliment();
+				F3::set('aliments',$aliments);
+
+				echo Views::instance()->render('Profil.html');
+			break;
+			case 'POST':
+				$session_id=$_GET["action"];
+				$profil=Profil::instance()->get_profil($session_id);
+				F3::set('profil',$profil);
+				$gout = unserialize($profil->gout);
+				F3::set('gout',$gout);
+
+				$aliments=Profil::instance()->get_aliment();
+				F3::set('aliments',$aliments);
+
+				echo Views::instance()->render('Profil.html');
+			break;
+		}
+	}
+	
 	function profil_info() {
 		switch(F3::get('VERB')) {
 			case 'GET':
@@ -49,7 +80,7 @@ class Profil_controller{
 					F3::reroute('/Profil');
 					return;
 				}
-				/*if(isset($_FILES['avatar']))// MODIF AVATAR QUI NE MARCHE PAS 
+				if(isset($_FILES['avatar']))
 				{
 					$rep='uploads/avatars/';
 					$fichier=basename($_FILES['avatar']['name']);
@@ -79,7 +110,8 @@ class Profil_controller{
 					{
 						echo $erreur;
 					}
-				}*/
+				}
+				}
 				$session_id=F3::get('SESSION.id');
 				$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail']);
 				if (!$profil) {
@@ -88,7 +120,7 @@ class Profil_controller{
 				F3::reroute('/Profil');
 			break;
 		}
-	}
+	
 	
 	function profil_pswd() {
 		switch(F3::get('VERB')) {
