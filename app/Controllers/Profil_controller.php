@@ -113,7 +113,7 @@ class Profil_controller{
 				}
 				}
 				$session_id=F3::get('SESSION.id');
-				$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail']);
+				$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['avatar']);
 				if (!$profil) {
 					F3::set('errorInfo',$error);
 				}
@@ -162,26 +162,31 @@ class Profil_controller{
 	}
 	
 	function contact() {
-		switch(F3::get('VERB')) {
-			case 'GET':
-				$session_id=F3::get('SESSION.id');
-				$contact=Profil::instance()->get_contact($session_id);
-				F3::set('contact',$contact);
+			switch(F3::get('VERB')) {
+				case 'GET':
+					F3::reroute('/Profil');
+				break;
+			switch(F3::get('VERB')) {
+				case 'GET':
+					$session_id=F3::get('SESSION.id');
+					$contact=Profil::instance()->get_contact($session_id);
+					F3::set('contact',$contact);
 
-				echo Views::instance()->render('contact.html');
-			break;
-			case 'POST':
-				$session_id=F3::get('SESSION.id');
-				$contact=Profil::instance()->modif_contact($session_id);
-				F3::set('contact',$contact);
-				
-				echo Views::instance()->render('contact.html');
-			break;
+					echo Views::instance()->render('contact.html');
+				break;
+				case 'POST':
+					$session_id=F3::get('SESSION.id');
+					$contact=Profil::instance()->modif_contact($session_id);
+					F3::set('contact',$contact);
+					
+					echo Views::instance()->render('contact.html');
+				break;
+			}
 		}
 	}
-	
 	function __destruct(){
 
 	} 
 }
+
 ?>
