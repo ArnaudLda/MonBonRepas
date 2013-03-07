@@ -151,7 +151,7 @@ class Repas_controller{
 						}
 					}
 					
-					F3::set('invit_list', $invit_list);
+					F3::set('invit_list', $liste_invites);
 					F3::set('invit_infos',$invit_infos);
 					F3::set('gout',$gouts_finaux);
 					$aliments=Profil::instance()->get_aliment();
@@ -160,6 +160,7 @@ class Repas_controller{
 				}
 				else if($im_invited) {
 					$crea=App::instance()->get_inscrit($invit_list[0]->log_crea);
+					F3::set('invit_list', $liste_invites);
 					F3::set('repas',$invit_list[0]);
 					F3::set('crea',$crea);
 					echo Views::instance()->render('repas_invit.html');
