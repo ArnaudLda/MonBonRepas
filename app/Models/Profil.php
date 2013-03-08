@@ -19,7 +19,7 @@ class Profil extends Prefab{
 	
 	function modif_info($session_id, $nom, $prenom, $mail) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
-		if($inscrit->find(array('mail=?',$mail))) {
+		if($inscrit->find(array('mail=? and id!=?',$mail,$session_id))) {
 			return false;
 		}
 		else {
