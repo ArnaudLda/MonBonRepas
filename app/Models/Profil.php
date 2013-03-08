@@ -23,7 +23,7 @@ class Profil extends Prefab{
 			return false;
 		}
 		else {
-			F3::get('dB')->exec("UPDATE inscrit SET nom='$nom', prenom='$prenom', mail='$mail' WHERE id='$session_id'");
+			F3::get('dB')->exec("UPDATE inscrit SET nom='$nom', prenom='$prenom', mail='$mail', avatar='$img' WHERE id='$session_id'");
 			return $inscrit->load(array('id=?',$session_id));
 		}
 	}

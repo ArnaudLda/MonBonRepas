@@ -42,6 +42,9 @@ class App_controller{
 				}
 				F3::set('SESSION.mail',$_POST['mail']);
 				F3::set('SESSION.id', $connect->id);
+				F3::set('SESSION.avatar', $connect->avatar);
+				F3::set('SESSION.nom', $connect->nom);
+				F3::set('SESSION.prenom', $connect->prenom);
 				F3::reroute('/dashboard');
 			break;
 		}

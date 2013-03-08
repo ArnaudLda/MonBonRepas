@@ -111,14 +111,27 @@ class Profil_controller{
 						echo $erreur;
 					}
 				}
-				}
+				
 				$session_id=F3::get('SESSION.id');
-				$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['avatar']);
+				$session_avatar=F3::get('SESSION.avatar');
+				$avatar=$rep . $fichier;
+				var_dump($avatar);
+				if(!isset($_FILES['avatar']))
+				{
+					var_dump($session_avatar);
+					$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$session_avatar);
+				}
+				else
+				{
+					var_dump($avatar);
+					$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$avatar);
+				}
 				if (!$profil) {
 					F3::set('errorInfo',$error);
 				}
 				F3::reroute('/Profil');
 			break;
+			}
 		}
 	
 	
