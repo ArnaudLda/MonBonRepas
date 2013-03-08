@@ -29,12 +29,11 @@ $(function(){
 function drawMap(position){
 	
 	var travelrStyle = [{featureType: "all"}];
-	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
+	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "gmap"});
 	
 	var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	$('#lat').val(LatLng.jb);
 	$('#lng').val(LatLng.ib);
-	
 	var lieu = new google.maps.Geocoder();
 	var GeoReverse=lieu.geocode({'latLng': LatLng}, function(results, status) 
 		{
@@ -54,12 +53,12 @@ function drawMap(position){
     scaleControl: false,
 	scrollwheel:false,
     center: LatLng,
-    mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'travelr']}
+    mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'gmap']}
   };
 	
   map = new google.maps.Map(document.getElementById('map_canvas'),mapOptions);
-  map.mapTypes.set('travelr', travelrType);
-  map.setMapTypeId('travelr');
+  map.mapTypes.set('gmap', travelrType);
+  map.setMapTypeId('gmap');
 	var markerLatLng=LatLng;
     var marker = new google.maps.Marker({
           position: markerLatLng,
@@ -88,10 +87,9 @@ function drawMap(position){
 function drawMap2(){
 	
 	var travelrStyle = [{featureType: "all"}];
-	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
+	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "gmap"});
 	
 	var LatLng = new google.maps.LatLng($('#lat').val(), $('#lng').val());
-	
 	var mapOptions = {
     zoom: 11,
     mapTypeControl: false,
@@ -100,13 +98,13 @@ function drawMap2(){
     scaleControl: false,
 	scrollwheel:false,
     center: LatLng,
-    mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'travelr']}
+    mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'gmap']}
   };
 	
   map = new google.maps.Map(document.getElementById('lieu_repas'),mapOptions);
-  map.mapTypes.set('travelr', travelrType);
-  map.setMapTypeId('travelr');
-	var markerLatLng=LatLng;
+  map.mapTypes.set('gmap', travelrType);
+  map.setMapTypeId('gmap');
+  var markerLatLng=LatLng;
     var marker = new google.maps.Marker({
           position: markerLatLng,
           map: map,

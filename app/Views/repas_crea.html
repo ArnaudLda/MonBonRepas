@@ -68,8 +68,8 @@
 		  <label>Le repas aura lieu à <input type="text" name="Lib_lieu" value="<?php echo $invit_list[0]->Lib_lieu; ?>"></label><br/>
 		  <fieldset class="geocoder">
 				<div id="lieu_repas" style="height:500px;display:block;"></div>
-				<input type="hidden" name="lat" value="<?php echo $invit_list->lat; ?>" id="lat"/>
-				<input type="hidden" name="lng" value="<?php echo $invit_list->lng; ?>" id="lng"/>
+				<input type="hidden" name="lat" value="<?php echo $invit_list[0]->lat; ?>" id="lat"/>
+				<input type="hidden" name="lng" value="<?php echo $invit_list[0]->lng; ?>" id="lng"/>
 		</fieldset>
 		  <label>Il aura lieu le <input type="text" name="date" value="<?php echo $invit_list[0]->date; ?>"></label>
 		  <input type="hidden" name="id_repas" value="<?php echo $invit_list[0]->id_repas;?>">
