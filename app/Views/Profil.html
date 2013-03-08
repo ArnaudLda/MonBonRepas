@@ -23,12 +23,9 @@
 				<div class="profil">
 					
 					<div style="position:relative; height:86px;">
-						<div class="circular">
-						</div>
+						<img class="circular" src="<?php echo $session_info->avatar; ?>">
 					</div>
-						
-					
-					     <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
+					     <p style="text-align:center; "><?php echo $session_info->prenom." ".$session_info->nom ?></p>
 				</div>
 			</a>
 			<hr style="position:relative; top:25px;" /> 
@@ -111,7 +108,7 @@
 			<h3>Poissons : </h3>
 			<?php $i = 0;
 				  foreach($aliments as $item) :?>
-				<?php if($item->categorie == "Poissons") :?>
+				<?php if($item->categorie == "Poisson") :?>
 					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['2_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
 				<?php $i++;
 					  endif;?>
@@ -119,7 +116,7 @@
 			<h3>Accompagnements : </h3>
 			<?php $i = 0;
 				  foreach($aliments as $item) :?>
-				<?php if($item->categorie == "Accompagnements") :?>
+				<?php if($item->categorie == "Accompagnement") :?>
 					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['3_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
 				<?php $i++;
 					  endif;?>
@@ -127,7 +124,7 @@
 			<h3>Desserts : </h3>
 			<?php $i = 0;
 				  foreach($aliments as $item) :?>
-				<?php if($item->categorie == "Desserts") :?>
+				<?php if($item->categorie == "Fruit") :?>
 					<label><input type="checkbox" name="1_<?php echo $i; ?>" <?php if ($gout['4_'.$i] == 'on') { echo 'checked="checked"'; } ?> ><?php echo $item->aliment; ?></label>
 				<?php $i++;
 					  endif;?>

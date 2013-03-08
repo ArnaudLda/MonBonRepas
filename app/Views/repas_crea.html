@@ -30,12 +30,9 @@
 				<div class="profil">
 					
 					<div style="position:relative; height:86px;">
-						<div class="circular">
-						</div>
+						<img class="circular" src="<?php echo $session_info->avatar; ?>">
 					</div>
-						
-					
-					     <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
+					     <p style="text-align:center; "><?php echo $session_info->prenom." ".$session_info->nom ?></p>
 				</div>
 			</a>
 			<hr style="position:relative; top:25px;" /> 
@@ -129,6 +126,54 @@
 					  foreach($aliments as $item) :?>
 					<?php if($item->categorie == "Légume") : ?>
 						<?php if ($gout['1_'.$i] == 'on') : ?>
+							<li><?php echo $item->aliment; ?></li>
+						<?php endif;
+						$i++;
+					endif;?>
+				<?php endforeach;?>
+			</ul>
+			<h3>Poissions : </h3>
+			<ul>
+				<?php $i = 0; // CORRECTIF APPLIQUE ICI
+					  foreach($aliments as $item) :?>
+					<?php if($item->categorie == "Poisson") : ?>
+						<?php if ($gout['2_'.$i] == 'on') : ?>
+							<li><?php echo $item->aliment; ?></li>
+						<?php endif;
+						$i++;
+					endif;?>
+				<?php endforeach;?>
+			</ul>
+			<h3>Accompagnements : </h3>
+			<ul>
+				<?php $i = 0; // CORRECTIF APPLIQUE ICI
+					  foreach($aliments as $item) :?>
+					<?php if($item->categorie == "Accompagnement") : ?>
+						<?php if ($gout['3_'.$i] == 'on') : ?>
+							<li><?php echo $item->aliment; ?></li>
+						<?php endif;
+						$i++;
+					endif;?>
+				<?php endforeach;?>
+			</ul>
+			<h3>Fruits : </h3>
+			<ul>
+				<?php $i = 0; // CORRECTIF APPLIQUE ICI
+					  foreach($aliments as $item) :?>
+					<?php if($item->categorie == "Fruit") : ?>
+						<?php if ($gout['4_'.$i] == 'on') : ?>
+							<li><?php echo $item->aliment; ?></li>
+						<?php endif;
+						$i++;
+					endif;?>
+				<?php endforeach;?>
+			</ul>
+			<h3>Fromages : </h3>
+			<ul>
+				<?php $i = 0; // CORRECTIF APPLIQUE ICI
+					  foreach($aliments as $item) :?>
+					<?php if($item->categorie == "Fromage") : ?>
+						<?php if ($gout['5_'.$i] == 'on') : ?>
 							<li><?php echo $item->aliment; ?></li>
 						<?php endif;
 						$i++;

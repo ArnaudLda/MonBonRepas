@@ -8,6 +8,8 @@ class Profil_controller{
 	function profil() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) { // faire sauter le switch
 			case 'GET':
 				$session_id=F3::get('SESSION.id');
@@ -39,6 +41,8 @@ class Profil_controller{
 	function profil_invit() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) { // faire sauter le switch
 			case 'GET':
 				$session_id=$_GET["action"];
@@ -177,8 +181,10 @@ class Profil_controller{
 	}
 	
 	function contact() {
-			if(!F3::get('SESSION.id'))
+		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 			switch(F3::get('VERB')) {
 				case 'GET':
 					$session_id=F3::get('SESSION.id');

@@ -23,12 +23,9 @@
 				<div class="profil">
 					
 					<div style="position:relative; height:86px;">
-						<div class="circular">
-						</div>
+						<img class="circular" src="<?php echo $session_info->avatar; ?>">
 					</div>
-						
-					
-					     <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
+					     <p style="text-align:center; "><?php echo $session_info->prenom." ".$session_info->nom ?></p>
 				</div>
 			</a>
 			<hr style="position:relative; top:25px;" /> 
@@ -50,7 +47,7 @@
 		</nav>     <!-- /////////////////////// NAVIGATION /////////////////////// -->
     <div id="coms">
   <div class="corps">
-	</div>
+	
 	<div>
 		<form method="post" action="commentaire" enctype="multipart/form-data" id="commentaire">
 			<input type="text" name="commentaires" placeholder="commentaire" id="commentaires"/>
@@ -80,14 +77,14 @@
 				<input type="hidden" name="lat" value="<?php echo $repas->lat; ?>" id="lat"/>
 				<input type="hidden" name="lng" value="<?php echo $repas->lng; ?>" id="lng"/>
 		</fieldset>
+	  <h2>Le repas aura lieu le <?php echo $repas->date; ?></h2>
 	  <a href="change_statut?action=<?php echo $repas->id_repas; ?>&rep=accepter">ACCEPTER</a><br/><a href="change_statut?action=<?php echo $repas->id_repas; ?>&rep=refuser">REFUSER</a>
   </section>
   <a href="https://twitter.com/share" class="twitter-share-button" data-texte="Venez vous aussi voir mon repas" data-related="Mon bon repas:Le meilleure repas de votre vie" data-lang="en" data-size="large" data-count="horizontal">Tweet</a>
-  <footer>
-    <a href="we-live-blue/">We think blue</a>
-  </footer>
+
   <span class="trama"></span>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
   </div>
 </body>
 </html>

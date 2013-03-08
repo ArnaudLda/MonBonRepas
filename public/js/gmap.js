@@ -1,5 +1,5 @@
 var map;
-var image='/GitHub/MonBonRepas/public/images/markeur.png';
+var image='/Git/MonBonRepas/public/images/markeur.png';
 
 $(function(){
 	if(document.getElementById('map_canvas'))

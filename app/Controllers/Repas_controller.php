@@ -10,6 +10,8 @@ class Repas_controller{
 	function crea_repas() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) {
 			case 'GET':
 				$contacts = Repas::instance()->get_contact(F3::get('SESSION.id'));
@@ -85,6 +87,8 @@ class Repas_controller{
 	function gest_repas() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) {
 			case 'GET':
 				$id=F3::get('SESSION.id');
@@ -113,6 +117,8 @@ class Repas_controller{
 	function repas() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) {
 			case 'GET':
 				$id=$_GET["action"];
@@ -130,6 +136,7 @@ class Repas_controller{
 					}
 				}
 				$invites=Repas::instance()->get_rep($id, $My_id);	// MODIF 
+				$liste_invites = array();
 				foreach ($invites as $i => $invits)			 
 				{
 					$liste_invites[$i]=App::instance()->get_inscrit($invits->log_invit);
@@ -163,7 +170,10 @@ class Repas_controller{
 				}
 				else if($im_invited) {
 					$crea=App::instance()->get_inscrit($invit_list[0]->log_crea);
-					F3::set('invit_list', $liste_invites);
+					
+					if($liste_invites) {
+						F3::set('invit_list', $liste_invites);
+					}
 					F3::set('repas',$invit_list[0]);
 					F3::set('crea',$crea);
 					echo Views::instance()->render('repas_invit.html');
@@ -238,6 +248,8 @@ class Repas_controller{
 	function change_statut() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) {
 			case 'GET':
 				$My_id=F3::get('SESSION.id');

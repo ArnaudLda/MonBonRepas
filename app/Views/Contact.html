@@ -22,15 +22,12 @@
     <nav>
       <a href="Profil">
         <div class="profil">
-          
-          <div style="position:relative; height:86px;">
-            <div class="circular">
-            </div>
-          </div>
-            
-          
-               <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
-        </div>
+					
+					<div style="position:relative; height:86px;">
+						<img class="circular" src="<?php echo $session_info->avatar; ?>">
+					</div>
+					     <p style="text-align:center; "><?php echo $session_info->prenom." ".$session_info->nom ?></p>
+				</div>
       </a>
       <hr style="position:relative; top:25px;" /> 
       <a href="Gest_Repas">

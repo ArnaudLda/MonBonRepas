@@ -93,7 +93,7 @@
 			height: 86px;
 			border-radius: 150px;
 			border:0px solid #d63800;
-			background: url('../images/profil1.jpg') no-repeat;
+			display : block;
 			-webkit-transition:0.3s;
 			}
 		.profil:hover .circular{

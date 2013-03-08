@@ -85,6 +85,8 @@ class App_controller{
 	function dashboard() {
 		if(!F3::get('SESSION.id'))
 			F3::reroute('/');
+		$info = App::instance()->get_inscrit(F3::get('SESSION.id'));
+		F3::set("session_info",$info);
 		switch(F3::get('VERB')) {
 			case 'GET':
 				$id=F3::get('SESSION.id'); // USE ID
