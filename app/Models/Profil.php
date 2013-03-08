@@ -17,16 +17,21 @@ class Profil extends Prefab{
 		return $inscrit->load(array('id=?',$session_id));
 	}
 	
-	function modif_info($session_id, $nom, $prenom, $mail, $img) {
+	function modif_info($session_id, $nom, $prenom, $mail) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');
 		if($inscrit->find(array('mail=?',$mail))) {
 			return false;
 		}
 		else {
-			F3::get('dB')->exec("UPDATE inscrit SET nom='$nom', prenom='$prenom', mail='$mail', avatar='$img' WHERE id='$session_id'");
+			F3::get('dB')->exec("UPDATE inscrit SET nom='$nom', prenom='$prenom', mail='$mail' WHERE id='$session_id'");
 			return $inscrit->load(array('id=?',$session_id));
 		}
 	}
+	
+	function modif_avatar($session_id, $avatar) {
+		F3::get('dB')->exec("UPDATE inscrit SET avatar='$avatar' WHERE id='$session_id'");
+	}
+	
 	
 	function modif_pswd($session_id, $old_pswd, $new_pswd, $new_pswd_bis) {
 		$inscrit=new DB\SQL\Mapper(F3::get('dB'),'inscrit');

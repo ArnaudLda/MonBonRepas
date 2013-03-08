@@ -80,6 +80,47 @@ class Profil_controller{
 					F3::reroute('/Profil');
 					return;
 				}
+				$session_id=F3::get('SESSION.id');
+				$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail']);
+				
+				if (!$profil) {
+					F3::set('errorInfo',$error);
+				}
+				F3::reroute('/Profil');
+			break;
+			}
+		}
+	
+	
+	function profil_pswd() {
+		switch(F3::get('VERB')) {
+			case 'GET':
+				F3::reroute('/Profil');
+			break;
+			case 'POST':
+				$check=array('old_pswd'=>'required','new_pswd'=>'required','new_pswd_bis'=>'required');
+				$error=Datas::instance()->check(F3::get('POST'),$check);
+				if($error) {
+					F3::set('errorInfo',$error);
+					F3::reroute('/Profil');
+					return;
+				}
+				$session_id=F3::get('SESSION.id');
+				$profil = Profil::instance()->modif_pswd($session_id,$_POST['old_pswd'],$_POST['new_pswd'],$_POST['new_pswd_bis']);
+				if (!$profil) {
+					F3::set('errorInfo',$error);
+				}
+				F3::reroute('/Profil');
+			break;
+		}
+	}
+	
+	function profil_avat() {
+		switch(F3::get('VERB')) {
+			case 'GET':
+				F3::reroute('/Profil');
+			break;
+			case 'POST':
 				if(isset($_FILES['avatar']))
 				{
 					$rep='uploads/avatars/';
@@ -111,48 +152,9 @@ class Profil_controller{
 						echo $erreur;
 					}
 				}
-				
 				$session_id=F3::get('SESSION.id');
-				$session_avatar=F3::get('SESSION.avatar');
-				$avatar=$rep . $fichier;
-				var_dump($avatar);
-				if(!isset($_FILES['avatar']))
-				{
-					var_dump($session_avatar);
-					$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$session_avatar);
-				}
-				else
-				{
-					var_dump($avatar);
-					$profil = Profil::instance()->modif_info($session_id,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$avatar);
-				}
-				if (!$profil) {
-					F3::set('errorInfo',$error);
-				}
-				F3::reroute('/Profil');
-			break;
-			}
-		}
-	
-	
-	function profil_pswd() {
-		switch(F3::get('VERB')) {
-			case 'GET':
-				F3::reroute('/Profil');
-			break;
-			case 'POST':
-				$check=array('old_pswd'=>'required','new_pswd'=>'required','new_pswd_bis'=>'required');
-				$error=Datas::instance()->check(F3::get('POST'),$check);
-				if($error) {
-					F3::set('errorInfo',$error);
-					F3::reroute('/Profil');
-					return;
-				}
-				$session_id=F3::get('SESSION.id');
-				$profil = Profil::instance()->modif_pswd($session_id,$_POST['old_pswd'],$_POST['new_pswd'],$_POST['new_pswd_bis']);
-				if (!$profil) {
-					F3::set('errorInfo',$error);
-				}
+				$avatar=$img;
+				$profil = Profil::instance()->modif_avatar($session_id,$avatar);
 				F3::reroute('/Profil');
 			break;
 		}
