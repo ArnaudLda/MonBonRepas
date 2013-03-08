@@ -4,48 +4,59 @@
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title></title>
-	<meta name="description" content="">
+  <title>MonBonRepas - Profil</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="public/css/style.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="public/css/contact.css" type="text/css" media="screen"/>
+  <script type="text/javascript" src="public/js/jquery.js"></script>
 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" href="public/css/supersized.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="public/css/travelr.css" type="text/css" media="screen"  />
-  <link href='http://fonts.googleapis.com/css?family=Strait' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="public/js/lib/modernizr-2.5.3.min.js"></script>
-	<script type="text/javascript" src="public/js/lib/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="public/js/lib/supersized.3.2.7.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  <script type="text/javascript" src="public/js/travelr.js"></script>
-  <script>var nb = 1;</script>
-	
 </head>
 <body>
-  <header>
+  <a href="dashboard"><img class="logo" src="public/images/logo.png" alt="MonBonRepas"></a>
+
+  <div class="content">
+            <!-- /////////////////////// NAVIGATION /////////////////////// -->
     <nav>
-    <a href="./"><span>Travel'r</span> BORNEO</a>
-    <ul class="main">
-        <li><a href="./"</a>Home</li>
-        <li><a href="connexion">Connexion</a></li>
-    </ul>
-    
-    <ul class="social">
-        <li><a href="">Follow us on Twitter</a></li> 
-        <li><a href="">LinkedIn</a></li>
-        <li><a href="">Viméo</a></li>
-        <li><a href="">Pinterest</a></li>
-    </ul>
+      <a href="Profil">
+        <div class="profil">
+          
+          <div style="position:relative; height:86px;">
+            <div class="circular">
+            </div>
+          </div>
+            
+          
+               <p style="text-align:center; "><?php echo $profil->prenom." ".$profil->nom ?></p>
+        </div>
+      </a>
+      <hr style="position:relative; top:25px;" /> 
+      <a href="Gest_Repas">
+            <div class="gerer"></div>
+              <p style="text-align:center">Gérer les repas</p>
+      </a>
+      <hr style="position:relative; top:10px;" /> 
+      <a href="Crea_Repas">
+            <div class="organiser"></div>
+              <p style="text-align:center;">Organiser un repas</p>
+      </a>
+      <hr style="position:relative; top:10px;" /> 
+      <a href="Contact">
+            <div class="voscontact"></div>
+              <p style="text-align:center;">Vos contacts</p>
+      </a>
+      <a href="logout" style="position:relative;left:25px;opacity:0.4;">Déconnection</a>
     </nav>
-  </header>
-  <section>
-    
+              <!-- /////////////////////// NAVIGATION /////////////////////// -->
+   <script>var nb = 1;</script>
+    <span class="contacthead" >La liste de vos contacts</span>
+<div class="contact">
 	<form method="POST" action="">
-		
 		<div id="form">
-			<input name="0" type="mail" value="<?php echo $contact[0];?>" placeholder="Invité 0" > <a href="#" id="button">+</a>
+     
+			<input name="0" type="mail" value="<?php echo $contact[0];?>" placeholder="Invité 0" > 
 			
 			<?php for($i = 1; $i < sizeof($contact); $i++) {
 				echo '<input name="'.$i.'" type="mail" value="'.$contact[$i].'" placeholder="Invité '.$i.'" >
@@ -53,17 +64,12 @@
 					nb = '.$i.'+1;
 				</script>';
 			}?>
-		</div>
-		
+		</div><a href="#" id="button">+ Ajouter un contact</a>
 		<input type="submit" value="Valider">
 	</form>
-    
-  </section>
-  <footer>
-    <a href="we-live-blue/">We think blue</a>
-  </footer>
-  <span class="trama"></span>
-  
+
+</div>
+  <span class="contactbot"></span>
   <script type="text/javascript" src="public/js/inputs.js"></script>
 </body>
 </html>

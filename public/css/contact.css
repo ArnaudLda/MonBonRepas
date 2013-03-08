@@ -1,0 +1,53 @@
+ @import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+* { box-sizing:border-box; }
+
+.contacthead{
+  text-align: center;
+  padding-top:30px;
+  color:#dcdcdc;
+  top:-5px;
+  z-index: 0;
+  position:relative;
+  margin:0 auto 20px auto; 
+  background:url('../images/contact_head.png');
+  width:391px;
+  height:99px;
+  display:block;
+  z-index: 3;
+}
+.contact  { 
+  top:-50px;
+  left:2px;
+  position:relative;
+  display: block;
+  padding:25px 25px 40px;
+  margin:0 auto 20px auto; 
+  font:20px 'Gloria Hallelujah', cursive; 
+  line-height:1.5;
+  border:0;
+  border-radius:3px;
+  background:url('../images/contact_repeat.jpg') repeat-y;
+  overflow:hidden;
+  font-smoothing:subpixel-antialiased;
+  width:391px;
+}
+.contact input{
+  background:none;
+  border:none;
+    height:100px;
+   font: 20px 'Gloria Hallelujah', cursive; 
+   color:black;
+   -webkit-box-shadow:none;
+ }
+.contactbot{
+  margin:auto;
+  display:block;
+  z-index: 3;
+  left:-4px;
+  top:-100px;
+  position:relative;
+  background:url("../images/contact_bot.png") no-repeat;
+  display:block;
+  width:395px;
+  height:140px;
+}

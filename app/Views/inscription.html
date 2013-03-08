@@ -7,11 +7,6 @@
 <link rel="stylesheet" href="public/css/parallax.css" type="text/css" media="screen"/>
 <script type="text/javascript" src="public/js/jquery.js"></script>
 <script type="text/javascript" src="public/js/jquery.jparallax.js"></script>
-
-
-<style type="text/css" media="screen">
-    
-</style>
 <script type="text/javascript">
 $(document).ready(function () {  
        $('#parallax').jparallax();
@@ -59,9 +54,8 @@ $(document).ready(function () {
                 <p><input type="email" name="mail" id="mail" placeholder="Adresse e-mail" required autocomplete="off"/><?php if($errorMsg['mail']){echo 'value="error"';} ?> </p>
                 <p><input type="password" name="passwd" id="passwd" placeholder="Mot de passe" required autocomplete="off"/><?php if($errorMsg['passwd']){echo 'value="error"';} ?><?php if($errorMsg['mail']){echo 'value="error"';} ?> </p>
 
-                <p><a href="#">Mot de passe oublié ?</a></p>
 
-                <p><input type="submit" value="Login"></p>
+                <p><input type="submit" value="S'inscrire"></p>
 
             </fieldset>
 
@@ -71,8 +65,7 @@ $(document).ready(function () {
 
         <p>
 
-            <a class="facebook-before"><span class="fontawesome-facebook"></span></a>
-            <button class="facebook">Connexion avec Facebook</button>
+          <a href="connexion" title="">Connectez-vous !</a>
 
         </p>
     </div> <!-- end login -->

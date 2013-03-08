@@ -20,10 +20,6 @@
 	width: 1000px;
 	margin: 0 auto;
 }
-body {
-	
-}
-
 a { text-decoration: none; }
 
 h1 { font-size: 1em; }
@@ -61,6 +57,7 @@ form fieldset input[type="text"], input[type="password"], input[type="email"] {
 	-webkit-appearance:none;
 }
 
+
 form fieldset input[type="submit"] {
 	background-color: #ff591e;
 	border: none;
@@ -76,14 +73,11 @@ form fieldset input[type="submit"] {
 	-webkit-appearance:none;
 }
 
-form fieldset a {
-	color: #5a5656;
-	font-size: 10px;
-}
 
 form fieldset a:hover { text-decoration: underline; }
 
 .btn-round {
+	position:relative;
 	background-color: #5a5656;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
@@ -97,31 +91,27 @@ form fieldset a:hover { text-decoration: underline; }
 	text-align: center;
 	text-transform: uppercase;
 	width: 50px;
+	left:10px;
 }
-
-.facebook-before {
-	background-color: #0064ab;
-	border-radius: 3px 0px 0px 3px;
-	-moz-border-radius: 3px 0px 0px 3px;
-	-webkit-border-radius: 3px 0px 0px 3px;
-	color: #f4f4f4;
-	display: block;
-	float: left;
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	width: 50px;
-}
-
-.facebook {
-	background-color: #0079ce;
+a{
+	position:relative;
+	left:80px;
+	margin:auto;
+	padding:20px;
+	background-color: #ff591e;
 	border: none;
-	border-radius: 0px 3px 3px 0px;
-	-moz-border-radius: 0px 3px 3px 0px;
-	-webkit-border-radius: 0px 3px 3px 0px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 	color: #f4f4f4;
 	cursor: pointer;
+	font-size: 12px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 	height: 50px;
 	text-transform: uppercase;
-	width: 250px;
+	width: 500px;
+	-webkit-appearance:none;
 }
+
+
+

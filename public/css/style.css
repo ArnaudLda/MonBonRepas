@@ -24,6 +24,13 @@
 		}
 		a:hover{
 			color:#ff703d;
+
+		}
+		 span.com a{
+			color:#ff703d;
+		}
+		span.com a:hover{
+			color:#fff;
 		}
 		.logo{
 			display:block;
@@ -54,6 +61,7 @@
 			position: relative;
 		}
 		.gerer{
+
 			position:relative;
 			top:40px;
 			margin:auto;
@@ -62,12 +70,22 @@
 			background:url("../images/gerer.png") no-repeat;
 		}
 		.organiser{
+			font-size:14px;
 			position:relative;
 			top:20px;
 			margin:auto;
 			height:130px;
 			width:110px;
 			background:url("../images/organiser.png") no-repeat;
+		}
+		.voscontact{
+			font-size:14px;
+			position:relative;
+			top:40px;
+			margin:auto;
+			height:120px;
+			width:50px;
+			background:url("../images/contact.png") no-repeat;
 		}
 		.circular {
 			margin:auto;
@@ -83,6 +101,7 @@
 			-webkit-transition:0.2s ease-in-out;
 		}
 		.corps{
+			min-height:650px;
 			display:inline-block;
 			padding:20px;
 			position:relative;
@@ -147,6 +166,9 @@
 			position: relative;
 			padding: 25px;
 		}
+		span.com input{
+			padding:10px;
+		}
 		#arrow{
 			margin-left:-10px;
 			top:20px;
@@ -194,7 +216,16 @@
 		textarea {
 		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		}
+		.com label{
+			color:#FFBBAC;
+			background:#FF2D1C;
+			opacity:0.8;
+			padding:8px;
+		}
+		.com label:hover{
 
+			opacity:1;
+		}
 		label {
 		  font-size: 14px;
 		  color: #444;		
