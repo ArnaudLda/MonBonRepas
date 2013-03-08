@@ -32,7 +32,8 @@ function drawMap(position){
 	var travelrType = new google.maps.StyledMapType(travelrStyle,{name: "travelr"});
 	
 	var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	$('#lat').val(LatLng.hb);
+	console.log(LatLng);
+	$('#lat').val(LatLng.jb);
 	$('#lng').val(LatLng.ib);
 	
 	var lieu = new google.maps.Geocoder();
@@ -125,7 +126,7 @@ function geoCoding(marker) {
 				$('#lat').val(data[0].geometry.location.lat());
 				$('#lng').val(data[0].geometry.location.lng());
 				google.maps.event.addListener(marker,'dragend', function(){
-				  $('#lat').val(this.getPosition().lat()); 
+				$('#lat').val(this.getPosition().lat()); 
 				$('#lng').val(this.getPosition().lng()); 
 				});
 			}
